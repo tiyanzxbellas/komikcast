@@ -3,39 +3,31 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KomikCast - Baca Komik Online</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>Komikcast - Baca Komik Online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <style>
-        /* ===== RESET & BASE ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #0b0e14;
             color: #e8edf5;
-            line-height: 1.6;
             min-height: 100vh;
         }
-        a { text-decoration: none; color: inherit; }
-        img { max-width: 100%; display: block; }
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-
-        /* ===== SCROLLBAR ===== */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #1a1f2a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: #4a6cf7; border-radius: 10px; }
-
-        /* ===== HEADER ===== */
-        .navbar {
-            background: rgba(11, 14, 20, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            padding: 14px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .navbar .container {
+
+        /* HEADER */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid #1e2630;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -43,962 +35,461 @@
             gap: 12px;
         }
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 900;
             font-size: 24px;
-            color: #fff;
+            font-weight: 700;
+            color: #f97316;
+            letter-spacing: -0.5px;
         }
-        .logo i { color: #4a6cf7; font-size: 28px; }
         .logo span {
-            background: linear-gradient(135deg, #4a6cf7, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #e8edf5;
         }
-        .nav-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-        .nav-links a {
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-weight: 500;
-            font-size: 14px;
-            color: #9aa3b8;
-            transition: all 0.25s ease;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            background: rgba(74, 108, 247, 0.15);
-            color: #fff;
-        }
-        .nav-links a.active { color: #4a6cf7; }
         .search-box {
             display: flex;
-            align-items: center;
-            background: #1a1f2a;
-            border-radius: 12px;
-            padding: 4px 8px 4px 16px;
-            border: 1px solid transparent;
-            transition: border 0.3s;
-            min-width: 200px;
-        }
-        .search-box:focus-within {
-            border-color: #4a6cf7;
-            background: #1e2330;
+            gap: 8px;
+            flex: 1;
+            max-width: 440px;
+            min-width: 180px;
         }
         .search-box input {
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #fff;
-            padding: 10px 6px;
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 30px;
+            border: 1px solid #2a3440;
+            background: #141a22;
+            color: #e8edf5;
             font-size: 14px;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: 0.2s;
         }
-        .search-box input::placeholder { color: #5a637a; }
+        .search-box input:focus {
+            border-color: #f97316;
+        }
+        .search-box input::placeholder {
+            color: #6b7a8d;
+        }
         .search-box button {
-            background: none;
+            padding: 10px 22px;
+            border-radius: 30px;
             border: none;
-            color: #5a637a;
+            background: #f97316;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
             cursor: pointer;
-            padding: 8px 10px;
-            font-size: 16px;
-            transition: color 0.3s;
+            transition: 0.2s;
         }
-        .search-box button:hover { color: #4a6cf7; }
+        .search-box button:hover {
+            background: #e0660e;
+        }
 
-        /* ===== HERO BANNER ===== */
-        .hero-banner {
-            margin: 28px 0 36px;
-            border-radius: 20px;
-            overflow: hidden;
-            position: relative;
-            background: #141a24;
-            min-height: 340px;
+        /* BANNER SLIDER */
+        .banner-section {
+            margin: 30px 0 40px;
         }
         .banner-slider {
             display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
+            gap: 16px;
+            overflow-x: auto;
+            padding: 4px 2px 16px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
-        .banner-slide {
-            min-width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            padding: 30px 40px;
-            min-height: 340px;
-            align-items: center;
-            background-size: cover;
-            background-position: center;
-            position: relative;
+        .banner-slider::-webkit-scrollbar {
+            height: 4px;
         }
-        .banner-slide::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, rgba(11,14,20,0.85) 40%, rgba(11,14,20,0.2) 100%);
-            z-index: 0;
+        .banner-slider::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 4px;
         }
-        .banner-slide > * { position: relative; z-index: 1; }
-        .banner-info { display: flex; flex-direction: column; gap: 10px; }
-        .banner-info .badge {
-            display: inline-block;
-            background: rgba(74,108,247,0.25);
-            color: #4a6cf7;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
+        .banner-slider::-webkit-scrollbar-track {
+            background: #1e2630;
+            border-radius: 4px;
+        }
+        .banner-item {
+            flex: 0 0 280px;
+            scroll-snap-align: start;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #141a22;
+            border: 1px solid #1e2630;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+        .banner-item:hover {
+            transform: translateY(-4px);
+            border-color: #f97316;
+        }
+        .banner-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            display: block;
+        }
+        .banner-info {
+            padding: 14px 16px 18px;
+        }
+        .banner-info h3 {
+            font-size: 15px;
             font-weight: 600;
-            text-transform: uppercase;
-            width: fit-content;
-        }
-        .banner-info h2 { font-size: 28px; font-weight: 800; line-height: 1.2; }
-        .banner-info .meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px 20px;
-            font-size: 14px;
-            color: #9aa3b8;
-        }
-        .banner-info .meta i { margin-right: 6px; color: #4a6cf7; }
-        .banner-info p {
-            color: #b0baca;
-            font-size: 14px;
-            max-width: 480px;
+            margin-bottom: 4px;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        .banner-info .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #4a6cf7;
-            color: #fff;
-            padding: 10px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            width: fit-content;
-            margin-top: 4px;
-        }
-        .banner-info .btn:hover {
-            background: #5f7cf8;
-            transform: translateY(-2px);
-        }
-        .banner-image {
+        .banner-info .meta {
+            font-size: 12px;
+            color: #8a9aa8;
             display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-        .banner-image img {
-            max-height: 260px;
-            width: auto;
-            border-radius: 14px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-            object-fit: cover;
-        }
-        .banner-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 16px;
-        }
-        .banner-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #2a3040;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .banner-dots span.active {
-            background: #4a6cf7;
-            width: 28px;
-            border-radius: 6px;
-        }
-
-        /* ===== SECTION ===== */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 40px 0 20px;
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 10px;
         }
-        .section-header h2 {
-            font-size: 22px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .banner-info .meta .tag {
+            background: #f9731622;
+            color: #f97316;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 11px;
         }
-        .section-header h2 i { color: #4a6cf7; }
-        .section-header .view-all {
-            font-size: 13px;
-            color: #4a6cf7;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: gap 0.3s;
-            cursor: pointer;
-        }
-        .section-header .view-all:hover { gap: 12px; }
 
-        /* ===== GRID ===== */
-        .komik-grid {
+        /* SECTION TITLE */
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 36px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title .badge {
+            font-size: 12px;
+            font-weight: 400;
+            color: #8a9aa8;
+            background: #1e2630;
+            padding: 2px 12px;
+            border-radius: 20px;
+        }
+
+        /* GRID KOMIK */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 20px;
         }
-        .komik-card {
-            background: #141a24;
+        .card {
+            background: #141a22;
             border-radius: 14px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #1e2630;
+            transition: 0.2s;
             cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.04);
         }
-        .komik-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-            border-color: rgba(74,108,247,0.2);
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #f97316;
         }
-        .komik-card .thumb {
-            position: relative;
-            aspect-ratio: 2/3;
-            overflow: hidden;
-            background: #0f141e;
-        }
-        .komik-card .thumb img {
+        .card img {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 2/3;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            display: block;
         }
-        .komik-card:hover .thumb img { transform: scale(1.05); }
-        .komik-card .thumb .format-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #9aa3b8;
+        .card-body {
+            padding: 12px 14px 16px;
         }
-        .komik-card .thumb .rating {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            backdrop-filter: blur(4px);
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #fbbf24;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .komik-card .info { padding: 12px 14px 16px; }
-        .komik-card .info h3 {
+        .card-body h4 {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 4px;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.3;
         }
-        .komik-card .info .author {
+        .card-body .chapters {
             font-size: 12px;
-            color: #7a839a;
-            margin-bottom: 6px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #8a9aa8;
         }
-        .komik-card .info .chapters {
+        .card-body .rating {
             font-size: 12px;
-            color: #4a6cf7;
-            font-weight: 500;
-        }
-        .komik-card .info .genres {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 6px;
-        }
-        .komik-card .info .genres span {
-            font-size: 9px;
-            background: #1a1f2a;
-            padding: 2px 10px;
-            border-radius: 12px;
-            color: #9aa3b8;
-            text-transform: lowercase;
+            color: #fbbf24;
+            font-weight: 600;
         }
 
-        /* ===== GENRE CHIPS ===== */
-        .genre-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 10px 0 6px;
-        }
-        .genre-chips .chip {
-            background: #141a24;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #b0baca;
-            border: 1px solid rgba(255,255,255,0.06);
-            transition: all 0.25s;
-            cursor: pointer;
-        }
-        .genre-chips .chip:hover {
-            background: #1a1f2a;
-            border-color: #4a6cf7;
-            color: #fff;
-        }
-
-        /* ===== PAGINATION ===== */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 30px 0 20px;
-            flex-wrap: wrap;
-        }
-        .pagination button {
-            background: #141a24;
-            border: 1px solid rgba(255,255,255,0.06);
-            color: #b0baca;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .pagination button:hover {
-            background: #1a1f2a;
-            border-color: #4a6cf7;
-            color: #fff;
-        }
-        .pagination button.active {
-            background: #4a6cf7;
-            color: #fff;
-            border-color: #4a6cf7;
-        }
-        .pagination button:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
+        /* LOADING */
         .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 0;
-            color: #5a637a;
-            font-size: 14px;
-            gap: 12px;
-        }
-        .loading i {
-            font-size: 28px;
-            color: #4a6cf7;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .footer {
-            border-top: 1px solid rgba(255,255,255,0.06);
-            margin-top: 60px;
-            padding: 30px 0;
             text-align: center;
-            color: #5a637a;
-            font-size: 13px;
+            padding: 60px 20px;
+            color: #6b7a8d;
         }
-        .footer a { color: #4a6cf7; }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 992px) {
-            .banner-slide {
-                grid-template-columns: 1fr;
-                padding: 30px 24px;
-                text-align: center;
-                min-height: 300px;
+        .loading .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #1e2630;
+            border-top: 4px solid #f97316;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
             }
-            .banner-info p { max-width: 100%; }
-            .banner-info .btn { margin: 0 auto; }
-            .banner-image { display: none; }
-            .banner-info h2 { font-size: 22px; }
         }
-        @media (max-width: 768px) {
-            .navbar .container { flex-direction: column; align-items: stretch; gap: 8px; }
-            .nav-links { justify-content: center; }
-            .search-box { min-width: unset; width: 100%; }
-            .komik-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
-            .banner-slide { padding: 20px 16px; min-height: 240px; }
-            .banner-info h2 { font-size: 18px; }
-            .banner-info .meta { font-size: 12px; gap: 6px 12px; }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #ef4444;
         }
-        @media (max-width: 480px) {
-            .komik-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
-            .komik-card .info { padding: 8px 10px 12px; }
-            .komik-card .info h3 { font-size: 12px; }
-            .section-header h2 { font-size: 18px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .banner-item {
+                flex: 0 0 220px;
+            }
+            .banner-item img {
+                height: 120px;
+            }
+            header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-box {
+                max-width: 100%;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (min-width: 1025px) {
+            .grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
 
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">
-                <i class="fas fa-book-open"></i>
-                <span>KomikCast</span>
-            </a>
-            <div class="nav-links">
-                <a href="#" class="active">Beranda</a>
-                <a href="#" data-section="popular">Populer</a>
-                <a href="#" data-section="latest">Terbaru</a>
-                <a href="#" data-section="manga">Manga</a>
-                <a href="#" data-section="manhwa">Manhwa</a>
-            </div>
-            <div class="search-box" id="searchBox">
+        <!-- HEADER -->
+        <header>
+            <div class="logo">Komik<span>cast</span></div>
+            <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Cari komik..." />
-                <button id="searchBtn"><i class="fas fa-search"></i></button>
+                <button id="searchBtn">Cari</button>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <main class="container">
-
-        <!-- ===== HERO BANNER ===== -->
-        <section class="hero-banner" id="heroBanner">
+        <!-- BANNER -->
+        <section class="banner-section">
             <div class="banner-slider" id="bannerSlider">
-                <div class="banner-slide" style="justify-content:center;text-align:center;color:#5a637a;">
-                    <p><i class="fas fa-spinner fa-spin" style="font-size:40px;display:block;margin-bottom:12px;"></i> Memuat banner...</p>
+                <div class="loading" style="width:100%; padding:20px;">
+                    <div class="spinner"></div>
+                    <span>Memuat banner...</span>
                 </div>
             </div>
-            <div class="banner-dots" id="bannerDots"></div>
         </section>
 
-        <!-- ===== GENRE CHIPS ===== -->
-        <div class="genre-chips" id="genreChips"></div>
-
-        <!-- ===== SECTION: POPULER ===== -->
-        <div class="section-header">
-            <h2 id="sectionTitle"><i class="fas fa-fire"></i> Populer</h2>
-            <span class="view-all" id="viewPopular">Lihat semua <i class="fas fa-arrow-right"></i></span>
+        <!-- POPULAR -->
+        <div class="section-title">🔥 Populer <span class="badge">minggu ini</span></div>
+        <div class="grid" id="popularGrid">
+            <div class="loading" style="grid-column:1/-1;">
+                <div class="spinner"></div>
+                <span>Memuat...</span>
+            </div>
         </div>
-        <div class="komik-grid" id="popularGrid"></div>
-        <div class="pagination" id="popularPagination"></div>
 
-        <!-- ===== SECTION: TERBARU ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-clock"></i> Terbaru</h2>
-            <span class="view-all" id="viewLatest">Lihat semua <i class="fas fa-arrow-right"></i></span>
+        <!-- LATEST -->
+        <div class="section-title">🆕 Terbaru</div>
+        <div class="grid" id="latestGrid">
+            <div class="loading" style="grid-column:1/-1;">
+                <div class="spinner"></div>
+                <span>Memuat...</span>
+            </div>
         </div>
-        <div class="komik-grid" id="latestGrid"></div>
-        <div class="pagination" id="latestPagination"></div>
 
-        <!-- ===== SECTION: TOP MANGA ===== -->
-        <div class="section-header" id="top-manga">
-            <h2><i class="fas fa-book"></i> Top Manga</h2>
+        <!-- RECOMMENDATIONS -->
+        <div class="section-title">⭐ Rekomendasi</div>
+        <div class="grid" id="recommendGrid">
+            <div class="loading" style="grid-column:1/-1;">
+                <div class="spinner"></div>
+                <span>Memuat...</span>
+            </div>
         </div>
-        <div class="komik-grid" id="topMangaGrid"></div>
-        <div class="pagination" id="mangaPagination"></div>
 
-        <!-- ===== SECTION: TOP MANHWA ===== -->
-        <div class="section-header" id="top-manhwa">
-            <h2><i class="fas fa-pen-fancy"></i> Top Manhwa</h2>
+        <!-- TRENDING -->
+        <div class="section-title">📈 Trending</div>
+        <div class="grid" id="trendingGrid">
+            <div class="loading" style="grid-column:1/-1;">
+                <div class="spinner"></div>
+                <span>Memuat...</span>
+            </div>
         </div>
-        <div class="komik-grid" id="topManhwaGrid"></div>
-        <div class="pagination" id="manhwaPagination"></div>
 
-        <!-- ===== SECTION: REKOMENDASI ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-star"></i> Rekomendasi</h2>
+        <!-- MOST BOOKMARKED -->
+        <div class="section-title">🔖 Terbanyak di-bookmark</div>
+        <div class="grid" id="bookmarkGrid">
+            <div class="loading" style="grid-column:1/-1;">
+                <div class="spinner"></div>
+                <span>Memuat...</span>
+            </div>
         </div>
-        <div class="komik-grid" id="recommendGrid"></div>
 
-        <!-- ===== SECTION: TRENDING ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-chart-line"></i> Trending</h2>
-        </div>
-        <div class="komik-grid" id="trendingGrid"></div>
-
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2026 <a href="#">KomikCast</a> — Data dari API KomikCast &bull; Dibuat dengan <i class="fas fa-heart" style="color:#4a6cf7;"></i></p>
-        </div>
-    </footer>
+    </div>
 
     <script>
-        // ============================================================
-        // 1. KONFIGURASI API
-        // ============================================================
+        // ---------- BASE URL ----------
         const API_BASE = 'https://kcastapi.bani.biz.id';
 
-        // Fungsi untuk membuat URL dengan query parameter
-        function buildURL(endpoint, params = {}) {
-            const url = new URL(endpoint, API_BASE);
-            Object.keys(params).forEach(key => {
-                if (params[key] !== undefined && params[key] !== null) {
-                    url.searchParams.append(key, params[key]);
-                }
-            });
-            return url.toString();
+        // ---------- HELPER FETCH ----------
+        async function fetchJSON(url) {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            return res.json();
         }
 
-        // ============================================================
-        // 2. STATE PAGINATION
-        // ============================================================
-        const pageState = {
-            popular: { page: 1, totalPages: 1 },
-            latest: { page: 1, totalPages: 1 },
-            manga: { page: 1, totalPages: 1 },
-            manhwa: { page: 1, totalPages: 1 },
-        };
+        // ---------- RENDER CARD ----------
+        function renderCard(series) {
+            const cover = series.data.coverImage || '';
+            const title = series.data.title || 'Untitled';
+            const slug = series.data.slug || '#';
+            const totalCh = series.data.totalChapters || '?';
+            const rating = series.data.rating || 0;
+            const link = `#/series/${slug}`;
 
-        // ============================================================
-        // 3. FUNGSI FETCH DENGAN CACHE & ERROR HANDLING
-        // ============================================================
-        const cache = new Map();
-
-        async function fetchAPI(url, cacheKey) {
-            if (cacheKey && cache.has(cacheKey)) {
-                return cache.get(cacheKey);
-            }
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                const data = await res.json();
-                
-                // Handle response structure yang berbeda
-                // Coba akses data dari berbagai kemungkinan struktur
-                let result = data;
-                if (data.data) result = data.data;
-                if (data.result) result = data.result;
-                if (data.items) result = data.items;
-                
-                // Pastikan result adalah array
-                if (!Array.isArray(result) && result) {
-                    // Jika result bukan array tapi punya data
-                    if (result.data && Array.isArray(result.data)) {
-                        result = result.data;
-                    } else {
-                        result = [result];
-                    }
-                }
-                
-                const response = {
-                    status: data.status || 200,
-                    message: data.message || 'Success',
-                    data: Array.isArray(result) ? result : [],
-                    total: data.total || data.count || (Array.isArray(result) ? result.length : 0),
-                    currentPage: data.currentPage || data.page || 1,
-                    totalPages: data.totalPages || data.pages || 1,
-                    raw: data
-                };
-                
-                if (cacheKey) cache.set(cacheKey, response);
-                return response;
-            } catch (err) {
-                console.error('API Error:', err);
-                return { status: 500, message: err.message, data: [], total: 0, currentPage: 1, totalPages: 1 };
-            }
+            return `
+                <div class="card" onclick="window.location='${link}'">
+                    <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 300%22%3E%3Crect fill=%22%23141a22%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%236b7a8d%22 font-family=%22sans-serif%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
+                    <div class="card-body">
+                        <h4>${title}</h4>
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+                            <span class="chapters">Ch ${totalCh}</span>
+                            <span class="rating">⭐ ${rating}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
-        // ============================================================
-        // 4. RENDER BANNER
-        // ============================================================
-        async function renderBanners() {
-            const data = await fetchAPI(buildURL('/banners'), 'banners');
-            const slider = document.getElementById('bannerSlider');
-            const dots = document.getElementById('bannerDots');
+        // ---------- RENDER BANNER ----------
+        function renderBanner(banner) {
+            const cover = banner.data.coverImage || '';
+            const bg = banner.data.backgroundImage || cover;
+            const title = banner.data.title || 'Untitled';
+            const slug = banner.data.slug || '#';
+            const format = banner.data.format || 'Komik';
+            const link = `#/series/${slug}`;
 
-            if (!data || !data.data || data.data.length === 0) {
-                slider.innerHTML = `<div class="banner-slide" style="justify-content:center;text-align:center;color:#5a637a;">
-                    <p><i class="fas fa-image" style="font-size:40px;display:block;margin-bottom:12px;"></i> Tidak ada banner</p>
-                </div>`;
-                return;
-            }
-
-            const banners = data.data;
-            slider.innerHTML = banners.map((b, i) => {
-                // Coba ambil data dari berbagai struktur
-                const item = b.data || b;
-                const cover = item.coverImage || item.cover || item.image || '';
-                const bg = item.backgroundImage || item.background || item.bg || '';
-                const title = item.title || 'Untitled';
-                const author = item.author || 'Unknown';
-                const format = item.format || 'komik';
-                const rating = item.rating || 0;
-                const synopsis = item.synopsis || item.description || '';
-                const slug = item.slug || item.id || '';
-
-                return `
-                <div class="banner-slide" style="background-image: url('${bg}');">
+            return `
+                <div class="banner-item" onclick="window.location='${link}'">
+                    <img src="${bg || cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23141a22%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%236b7a8d%22 font-family=%22sans-serif%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBanner%3C/text%3E%3C/svg%3E'" />
                     <div class="banner-info">
-                        <span class="badge">${format.toUpperCase()} • ${item.status || 'Ongoing'}</span>
-                        <h2>${title}</h2>
-                        <div class="meta">
-                            <span><i class="fas fa-user"></i> ${author}</span>
-                            <span><i class="fas fa-star" style="color:#fbbf24;"></i> ${rating}/10</span>
-                            <span><i class="fas fa-bookmark"></i> ${item.totalChapters || item.chapters || 0} chapter</span>
-                        </div>
-                        <p>${(synopsis || '').slice(0, 150)}${(synopsis || '').length > 150 ? '...' : ''}</p>
-                        <a href="#" class="btn" data-slug="${slug}">
-                            <i class="fas fa-eye"></i> Baca Sekarang
-                        </a>
-                    </div>
-                    <div class="banner-image">
-                        <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
-                    </div>
-                </div>
-            `}).join('');
-
-            // Dots
-            dots.innerHTML = banners.map((_, i) =>
-                `<span class="${i === 0 ? 'active' : ''}" data-index="${i}"></span>`
-            ).join('');
-
-            // Slider logic
-            let current = 0;
-            const total = banners.length;
-            const slides = slider.querySelectorAll('.banner-slide');
-
-            function goTo(index) {
-                current = (index + total) % total;
-                slider.style.transform = `translateX(-${current * 100}%)`;
-                dots.querySelectorAll('span').forEach((dot, i) => {
-                    dot.classList.toggle('active', i === current);
-                });
-            }
-
-            dots.addEventListener('click', (e) => {
-                const dot = e.target.closest('span');
-                if (!dot) return;
-                const idx = parseInt(dot.dataset.index);
-                goTo(idx);
-            });
-
-            let interval = setInterval(() => goTo(current + 1), 6000);
-            slider.addEventListener('mouseenter', () => clearInterval(interval));
-            slider.addEventListener('mouseleave', () => {
-                interval = setInterval(() => goTo(current + 1), 6000);
-            });
-
-            document.querySelectorAll('.banner-info .btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const slug = btn.dataset.slug;
-                    if (slug) alert(`🔗 Navigasi ke: /series/${slug}`);
-                });
-            });
-        }
-
-        // ============================================================
-        // 5. RENDER GENRE CHIPS
-        // ============================================================
-        async function renderGenres() {
-            const data = await fetchAPI(buildURL('/genres'), 'genres');
-            const container = document.getElementById('genreChips');
-            if (!data || !data.data || data.data.length === 0) {
-                container.innerHTML = '';
-                return;
-            }
-
-            const genres = data.data.slice(0, 20);
-            container.innerHTML = genres.map(g => {
-                const name = g.data?.name || g.name || g.title || 'Unknown';
-                const id = g.id || g._id || '';
-                return `<span class="chip" data-id="${id}" data-name="${name}">${name}</span>`;
-            }).join('');
-
-            container.addEventListener('click', (e) => {
-                const chip = e.target.closest('.chip');
-                if (chip) {
-                    const name = chip.dataset.name;
-                    document.getElementById('searchInput').value = name;
-                    performSearch(name);
-                }
-            });
-        }
-
-        // ============================================================
-        // 6. RENDER KOMIK GRID dengan PAGINATION
-        // ============================================================
-        function renderKomikGrid(containerId, data, limit = 10, paginationId = null, pageStateObj = null) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            if (!data || !data.data || data.data.length === 0) {
-                container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#5a637a;">
-                    <i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:12px;"></i>
-                    Tidak ada komik
-                </div>`;
-                if (paginationId) {
-                    const pag = document.getElementById(paginationId);
-                    if (pag) pag.innerHTML = '';
-                }
-                return;
-            }
-
-            const items = data.data.slice(0, limit);
-            container.innerHTML = items.map(item => {
-                // Coba ambil data dari berbagai struktur
-                const s = item.data || item;
-                const cover = s.coverImage || s.cover || s.image || s.thumbnail || '';
-                const title = s.title || 'Untitled';
-                const author = s.author || s.artist || 'Unknown';
-                const format = s.format || s.type || 'komik';
-                const rating = s.rating || 0;
-                const totalCh = s.totalChapters || s.chapters || s.chapterCount || '?';
-                const genres = s.genres || s.tags || [];
-                const slug = s.slug || s.id || s._id || '';
-
-                return `
-                <div class="komik-card" data-slug="${slug}">
-                    <div class="thumb">
-                        <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
-                        <span class="format-badge">${format}</span>
-                        <span class="rating"><i class="fas fa-star"></i> ${rating}</span>
-                    </div>
-                    <div class="info">
                         <h3>${title}</h3>
-                        <div class="author">${author}</div>
-                        <div class="chapters"><i class="fas fa-book-open"></i> ${totalCh} ch</div>
-                        <div class="genres">
-                            ${(Array.isArray(genres) ? genres : []).slice(0, 3).map(g => {
-                                const name = g.data?.name || g.name || g.title || g;
-                                return `<span>${name}</span>`;
-                            }).join('')}
+                        <div class="meta">
+                            <span>${format}</span>
+                            <span class="tag">🔥 Hot</span>
                         </div>
                     </div>
                 </div>
-            `}).join('');
-
-            container.querySelectorAll('.komik-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const slug = card.dataset.slug;
-                    if (slug) alert(`🔗 Navigasi ke: /series/${slug}`);
-                });
-            });
-
-            // Render pagination
-            if (paginationId && pageStateObj) {
-                renderPagination(paginationId, pageStateObj.currentPage, pageStateObj.totalPages, (page) => {
-                    pageStateObj.page = page;
-                    loadSection(paginationId.replace('Pagination', ''), page);
-                });
-            }
+            `;
         }
 
-        // ============================================================
-        // 7. PAGINATION RENDER
-        // ============================================================
-        function renderPagination(containerId, current, total, onPageChange) {
+        // ---------- LOAD DATA ----------
+        async function loadSection(endpoint, containerId, renderFn, take = 10) {
             const container = document.getElementById(containerId);
-            if (!container) return;
+            try {
+                const url = endpoint.includes('?') ? endpoint : `${endpoint}?take=${take}`;
+                const json = await fetchJSON(url);
+                const items = json.data || [];
 
-            if (total <= 1) {
-                container.innerHTML = '';
-                return;
-            }
-
-            let html = '';
-            html += `<button ${current <= 1 ? 'disabled' : ''} data-page="${current - 1}"><i class="fas fa-chevron-left"></i></button>`;
-
-            const pages = [];
-            const maxVisible = 5;
-            let start = Math.max(1, current - Math.floor(maxVisible / 2));
-            let end = Math.min(total, start + maxVisible - 1);
-            if (end - start < maxVisible - 1) start = Math.max(1, end - maxVisible + 1);
-
-            for (let i = start; i <= end; i++) {
-                pages.push(i);
-            }
-
-            if (start > 1) {
-                html += `<button data-page="1">1</button>`;
-                if (start > 2) html += `<button disabled>...</button>`;
-            }
-
-            pages.forEach(p => {
-                html += `<button class="${p === current ? 'active' : ''}" data-page="${p}">${p}</button>`;
-            });
-
-            if (end < total) {
-                if (end < total - 1) html += `<button disabled>...</button>`;
-                html += `<button data-page="${total}">${total}</button>`;
-            }
-
-            html += `<button ${current >= total ? 'disabled' : ''} data-page="${current + 1}"><i class="fas fa-chevron-right"></i></button>`;
-
-            container.innerHTML = html;
-
-            container.querySelectorAll('button:not([disabled])').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const page = parseInt(btn.dataset.page);
-                    if (page && page !== current && page >= 1 && page <= total) {
-                        onPageChange(page);
-                    }
-                });
-            });
-        }
-
-        // ============================================================
-        // 8. LOAD SECTION dengan Pagination
-        // ============================================================
-        async function loadSection(section, page = 1) {
-            const take = 12;
-            let gridId, paginationId, endpoint, stateKey;
-
-            switch (section) {
-                case 'popular':
-                    gridId = 'popularGrid';
-                    paginationId = 'popularPagination';
-                    endpoint = '/series/popular';
-                    stateKey = 'popular';
-                    break;
-                case 'latest':
-                    gridId = 'latestGrid';
-                    paginationId = 'latestPagination';
-                    endpoint = '/series/latest';
-                    stateKey = 'latest';
-                    break;
-                case 'manga':
-                    gridId = 'topMangaGrid';
-                    paginationId = 'mangaPagination';
-                    endpoint = '/series/top/manga';
-                    stateKey = 'manga';
-                    break;
-                case 'manhwa':
-                    gridId = 'topManhwaGrid';
-                    paginationId = 'manhwaPagination';
-                    endpoint = '/series/top/manhwa';
-                    stateKey = 'manhwa';
-                    break;
-                default:
+                if (!items.length) {
+                    container.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;color:#6b7a8d;padding:30px;">Tidak ada data.</div>`;
                     return;
-            }
-
-            const url = buildURL(endpoint, { take, page, take_chapter: 2 });
-            const cacheKey = `${endpoint}_${page}`;
-            const data = await fetchAPI(url, cacheKey);
-
-            if (data) {
-                pageState[stateKey].currentPage = data.currentPage || page;
-                pageState[stateKey].totalPages = data.totalPages || 1;
-                renderKomikGrid(gridId, data, take, paginationId, pageState[stateKey]);
-            }
-        }
-
-        // ============================================================
-        // 9. SEARCH
-        // ============================================================
-        async function performSearch(query) {
-            if (!query.trim()) return;
-            const url = buildURL('/series/search', { 
-                q: query.trim(), 
-                take: 12, 
-                page: 1, 
-                take_chapter: 2 
-            });
-            const data = await fetchAPI(url, 'search_' + query.trim());
-            if (data && data.data) {
-                document.getElementById('sectionTitle').innerHTML = `<i class="fas fa-search"></i> Hasil: "${query}"`;
-                renderKomikGrid('popularGrid', data, 12);
-                document.getElementById('popularPagination').innerHTML = '';
-            }
-        }
-
-        // ============================================================
-        // 10. INIT
-        // ============================================================
-        async function init() {
-            // Tampilkan loading
-            document.querySelectorAll('.komik-grid').forEach(el => {
-                el.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat...</div>`;
-            });
-
-            // Render banner & genres
-            await renderBanners();
-            await renderGenres();
-
-            // Load semua section dengan page 1
-            await loadSection('popular', 1);
-            await loadSection('latest', 1);
-            await loadSection('manga', 1);
-            await loadSection('manhwa', 1);
-
-            // Load rekomendasi & trending (tanpa pagination)
-            const recommendData = await fetchAPI(buildURL('/series/recommendations', { take: 8, page: 1, method: 'all' }));
-            const trendingData = await fetchAPI(buildURL('/series/trending', { take: 8, page: 1 }));
-            renderKomikGrid('recommendGrid', recommendData, 8);
-            renderKomikGrid('trendingGrid', trendingData, 8);
-
-            // Event Search
-            document.getElementById('searchBtn').addEventListener('click', () => {
-                const q = document.getElementById('searchInput').value;
-                performSearch(q);
-            });
-            document.getElementById('searchInput').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const q = document.getElementById('searchInput').value;
-                    performSearch(q);
                 }
-            });
 
-            // Navbar navigation
-            document.querySelectorAll('.nav-links a[data-section]').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const section = link.dataset.section;
-                    const targetId = section === 'manga' ? 'top-manga' : 
-                                   section === 'manhwa' ? 'top-manhwa' : section;
-                    const target = document.getElementById(targetId);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // View All buttons
-            document.getElementById('viewPopular').addEventListener('click', () => {
-                alert('📚 Menampilkan semua komik populer...');
-            });
-            document.getElementById('viewLatest').addEventListener('click', () => {
-                alert('📚 Menampilkan semua komik terbaru...');
-            });
-
-            console.log('✅ KomikCast siap!');
+                container.innerHTML = items.map(renderFn).join('');
+            } catch (err) {
+                console.error(`Error loading ${containerId}:`, err);
+                container.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal memuat data. Coba refresh.</div>`;
+            }
         }
 
-        // Jalankan
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+        // ---------- LOAD ALL ----------
+        async function loadAll() {
+            // BANNER
+            await loadSection(`${API_BASE}/banners`, 'bannerSlider', renderBanner, 20);
 
+            // POPULAR (take 10)
+            await loadSection(`${API_BASE}/series/popular?take=10&take_chapter=2`, 'popularGrid', renderCard);
+
+            // LATEST (take 20)
+            await loadSection(`${API_BASE}/series/latest?take=20&take_chapter=3&page=1`, 'latestGrid', renderCard, 20);
+
+            // RECOMMENDATIONS (take 10)
+            await loadSection(`${API_BASE}/series/recommendations?take=10&page=1&method=all`, 'recommendGrid', renderCard);
+
+            // TRENDING (take 10)
+            await loadSection(`${API_BASE}/series/trending?take=10&page=1`, 'trendingGrid', renderCard);
+
+            // MOST BOOKMARKED (take 10)
+            await loadSection(`${API_BASE}/series/most-bookmarked?take=10&page=1`, 'bookmarkGrid', renderCard);
+        }
+
+        // ---------- SEARCH ----------
+        async function handleSearch() {
+            const q = document.getElementById('searchInput').value.trim();
+            if (!q) return alert('Masukkan judul komik yang ingin dicari.');
+
+            const container = document.getElementById('popularGrid'); // reuse popular grid
+            container.innerHTML = `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Mencari "${q}"...</span></div>`;
+
+            try {
+                const url =
+                `${API_BASE}/series/search?take=12&page=1&take_chapter=2&q=${encodeURIComponent(q)}`;
+                const json = await fetchJSON(url);
+                const items = json.data || [];
+
+                if (!items.length) {
+                    container.innerHTML =
+                        `<div style="grid-column:1/-1;text-align:center;color:#8a9aa8;padding:40px;">😕 Tidak ditemukan komik dengan judul "${q}".</div>`;
+                    return;
+                }
+
+                // scroll ke hasil
+                document.querySelector('.section-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                // update title sementara
+                const titleEl = document.querySelector('.section-title');
+                const origTitle = titleEl.innerHTML;
+                titleEl.innerHTML = `🔍 Hasil untuk "${q}" <span class="badge">${items.length} ditemukan</span>`;
+
+                container.innerHTML = items.map(renderCard).join('');
+
+                // restore title after a while? biarkan saja.
+            } catch (err) {
+                console.error(err);
+                container.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal mencari. Coba lagi.</div>`;
+            }
+        }
+
+        // ---------- EVENT LISTENERS ----------
+        document.getElementById('searchBtn').addEventListener('click', handleSearch);
+        document.getElementById('searchInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleSearch();
+        });
+
+        // ---------- START ----------
+        loadAll();
+    </script>
 </body>
 </html>
