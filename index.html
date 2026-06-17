@@ -33,12 +33,17 @@
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 12px;
+            position: sticky;
+            top: 0;
+            background: #0b0e14;
+            z-index: 100;
         }
         .logo {
             font-size: 24px;
             font-weight: 700;
             color: #f97316;
             letter-spacing: -0.5px;
+            cursor: pointer;
         }
         .logo span {
             color: #e8edf5;
@@ -80,6 +85,20 @@
         }
         .search-box button:hover {
             background: #e0660e;
+        }
+        .back-btn {
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1px solid #2a3440;
+            background: transparent;
+            color: #e8edf5;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.2s;
+            display: none;
+        }
+        .back-btn:hover {
+            background: #1e2630;
         }
 
         /* BANNER SLIDER */
@@ -243,6 +262,195 @@
             color: #ef4444;
         }
 
+        /* DETAIL PAGE */
+        .detail-page {
+            display: none;
+            padding: 20px 0;
+        }
+        .detail-page.active {
+            display: block;
+        }
+        .home-page {
+            display: block;
+        }
+        .home-page.hidden {
+            display: none;
+        }
+
+        .detail-hero {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: #141a22;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid #1e2630;
+            margin-bottom: 30px;
+        }
+        .detail-hero img {
+            width: 220px;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        .detail-info {
+            flex: 1;
+            min-width: 280px;
+        }
+        .detail-info h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .detail-info .sub {
+            color: #8a9aa8;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .detail-info .synopsis {
+            color: #c8d0d8;
+            line-height: 1.6;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+        .detail-info .genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .detail-info .genres span {
+            background: #1e2630;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #8a9aa8;
+        }
+        .detail-info .stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            color: #8a9aa8;
+            margin-top: 12px;
+        }
+        .detail-info .stats strong {
+            color: #e8edf5;
+        }
+
+        /* CHAPTER LIST */
+        .chapter-list {
+            background: #141a22;
+            border-radius: 16px;
+            border: 1px solid #1e2630;
+            overflow: hidden;
+        }
+        .chapter-item {
+            padding: 14px 20px;
+            border-bottom: 1px solid #1e2630;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .chapter-item:hover {
+            background: #1a222e;
+        }
+        .chapter-item:last-child {
+            border-bottom: none;
+        }
+        .chapter-item .ch-title {
+            font-weight: 500;
+        }
+        .chapter-item .ch-meta {
+            color: #6b7a8d;
+            font-size: 13px;
+        }
+
+        /* CHAPTER READER */
+        .reader-page {
+            display: none;
+            padding: 20px 0;
+        }
+        .reader-page.active {
+            display: block;
+        }
+        .reader-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .reader-container img {
+            width: 100%;
+            display: block;
+            margin-bottom: 4px;
+            border-radius: 4px;
+        }
+        .reader-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .reader-nav button {
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: none;
+            background: #f97316;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .reader-nav button:hover {
+            background: #e0660e;
+        }
+        .reader-nav button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .reader-nav .info {
+            color: #8a9aa8;
+            font-size: 14px;
+        }
+        .reader-nav .back-chapter {
+            background: #1e2630;
+            color: #e8edf5;
+        }
+        .reader-nav .back-chapter:hover {
+            background: #2a3440;
+        }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+        .pagination button {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #2a3440;
+            background: #141a22;
+            color: #e8edf5;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .pagination button:hover {
+            background: #1e2630;
+        }
+        .pagination button.active {
+            background: #f97316;
+            border-color: #f97316;
+        }
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 640px) {
             .grid {
@@ -262,6 +470,20 @@
             .search-box {
                 max-width: 100%;
             }
+            .detail-hero {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .detail-hero img {
+                width: 160px;
+            }
+            .detail-info .stats {
+                justify-content: center;
+            }
+            .detail-info .genres {
+                justify-content: center;
+            }
         }
         @media (min-width: 768px) and (max-width: 1024px) {
             .grid {
@@ -280,97 +502,192 @@
 
         <!-- HEADER -->
         <header>
-            <div class="logo">Komik<span>cast</span></div>
+            <div style="display:flex;align-items:center;gap:16px;">
+                <div class="logo" onclick="navigateTo('home')">Komik<span>cast</span></div>
+                <button class="back-btn" id="backBtn" onclick="goBack()">← Kembali</button>
+            </div>
             <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Cari komik..." />
                 <button id="searchBtn">Cari</button>
             </div>
         </header>
 
-        <!-- BANNER -->
-        <section class="banner-section">
-            <div class="banner-slider" id="bannerSlider">
-                <div class="loading" style="width:100%; padding:20px;">
+        <!-- HOME PAGE -->
+        <div class="home-page" id="homePage">
+
+            <!-- BANNER -->
+            <section class="banner-section">
+                <div class="banner-slider" id="bannerSlider">
+                    <div class="loading" style="width:100%; padding:20px;">
+                        <div class="spinner"></div>
+                        <span>Memuat banner...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- POPULAR -->
+            <div class="section-title">🔥 Populer <span class="badge">minggu ini</span></div>
+            <div class="grid" id="popularGrid">
+                <div class="loading" style="grid-column:1/-1;">
                     <div class="spinner"></div>
-                    <span>Memuat banner...</span>
+                    <span>Memuat...</span>
                 </div>
             </div>
-        </section>
 
-        <!-- POPULAR -->
-        <div class="section-title">🔥 Populer <span class="badge">minggu ini</span></div>
-        <div class="grid" id="popularGrid">
-            <div class="loading" style="grid-column:1/-1;">
-                <div class="spinner"></div>
-                <span>Memuat...</span>
+            <!-- LATEST -->
+            <div class="section-title">🆕 Terbaru</div>
+            <div class="grid" id="latestGrid">
+                <div class="loading" style="grid-column:1/-1;">
+                    <div class="spinner"></div>
+                    <span>Memuat...</span>
+                </div>
             </div>
+
+            <!-- RECOMMENDATIONS -->
+            <div class="section-title">⭐ Rekomendasi</div>
+            <div class="grid" id="recommendGrid">
+                <div class="loading" style="grid-column:1/-1;">
+                    <div class="spinner"></div>
+                    <span>Memuat...</span>
+                </div>
+            </div>
+
+            <!-- TRENDING -->
+            <div class="section-title">📈 Trending</div>
+            <div class="grid" id="trendingGrid">
+                <div class="loading" style="grid-column:1/-1;">
+                    <div class="spinner"></div>
+                    <span>Memuat...</span>
+                </div>
+            </div>
+
+            <!-- MOST BOOKMARKED -->
+            <div class="section-title">🔖 Terbanyak di-bookmark</div>
+            <div class="grid" id="bookmarkGrid">
+                <div class="loading" style="grid-column:1/-1;">
+                    <div class="spinner"></div>
+                    <span>Memuat...</span>
+                </div>
+            </div>
+
+            <!-- PAGINATION UNTUK BROWSE -->
+            <div class="section-title">📚 Semua Komik <span class="badge" id="browseCount">halaman 1</span></div>
+            <div class="grid" id="browseGrid">
+                <div class="loading" style="grid-column:1/-1;">
+                    <div class="spinner"></div>
+                    <span>Memuat...</span>
+                </div>
+            </div>
+            <div class="pagination" id="browsePagination"></div>
+
         </div>
 
-        <!-- LATEST -->
-        <div class="section-title">🆕 Terbaru</div>
-        <div class="grid" id="latestGrid">
-            <div class="loading" style="grid-column:1/-1;">
-                <div class="spinner"></div>
-                <span>Memuat...</span>
+        <!-- DETAIL PAGE -->
+        <div class="detail-page" id="detailPage">
+            <div id="detailContent">
+                <div class="loading"><div class="spinner"></div><span>Memuat detail...</span></div>
             </div>
+            <div class="section-title">📖 Daftar Chapter</div>
+            <div class="chapter-list" id="chapterList">
+                <div class="loading"><div class="spinner"></div><span>Memuat chapter...</span></div>
+            </div>
+            <div class="pagination" id="chapterPagination"></div>
         </div>
 
-        <!-- RECOMMENDATIONS -->
-        <div class="section-title">⭐ Rekomendasi</div>
-        <div class="grid" id="recommendGrid">
-            <div class="loading" style="grid-column:1/-1;">
-                <div class="spinner"></div>
-                <span>Memuat...</span>
-            </div>
-        </div>
-
-        <!-- TRENDING -->
-        <div class="section-title">📈 Trending</div>
-        <div class="grid" id="trendingGrid">
-            <div class="loading" style="grid-column:1/-1;">
-                <div class="spinner"></div>
-                <span>Memuat...</span>
-            </div>
-        </div>
-
-        <!-- MOST BOOKMARKED -->
-        <div class="section-title">🔖 Terbanyak di-bookmark</div>
-        <div class="grid" id="bookmarkGrid">
-            <div class="loading" style="grid-column:1/-1;">
-                <div class="spinner"></div>
-                <span>Memuat...</span>
+        <!-- READER PAGE -->
+        <div class="reader-page" id="readerPage">
+            <div class="reader-container">
+                <div class="reader-nav">
+                    <button class="back-chapter" onclick="closeReader()">← Kembali ke Chapter</button>
+                    <span class="info" id="readerInfo">Memuat...</span>
+                </div>
+                <div id="readerContent">
+                    <div class="loading"><div class="spinner"></div><span>Memuat gambar...</span></div>
+                </div>
+                <div class="reader-nav">
+                    <button id="prevChapterBtn" onclick="prevChapter()">⬅ Chapter Sebelumnya</button>
+                    <span class="info" id="readerNavInfo">-</span>
+                    <button id="nextChapterBtn" onclick="nextChapter()">Chapter Selanjutnya ➡</button>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script>
-        // ---------- BASE URL ----------
+        // ============================================================
+        //  BASE URL & STATE
+        // ============================================================
         const API_BASE = 'https://kcastapi.bani.biz.id';
 
-        // ---------- HELPER FETCH ----------
+        let currentSlug = null;
+        let currentChapters = [];
+        let currentChapterIndex = 0;
+        let currentPage = 1;
+        let totalBrowsePages = 1;
+        let currentBrowsePage = 1;
+
+        // ============================================================
+        //  NAVIGATION
+        // ============================================================
+        function navigateTo(page, data) {
+            document.getElementById('homePage').classList.toggle('hidden', page !== 'home');
+            document.getElementById('detailPage').classList.toggle('active', page === 'detail');
+            document.getElementById('readerPage').classList.toggle('active', page === 'reader');
+            document.getElementById('backBtn').style.display = (page === 'home') ? 'none' : 'inline-block';
+
+            if (page === 'home') {
+                document.querySelector('.logo').style.display = 'inline-block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                document.querySelector('.logo').style.display = 'inline-block';
+            }
+
+            if (page === 'detail' && data) {
+                loadDetail(data);
+            }
+            if (page === 'reader' && data) {
+                loadReader(data.slug, data.index);
+            }
+        }
+
+        function goBack() {
+            if (document.getElementById('readerPage').classList.contains('active')) {
+                closeReader();
+            } else if (document.getElementById('detailPage').classList.contains('active')) {
+                navigateTo('home');
+            } else {
+                navigateTo('home');
+            }
+        }
+
+        // ============================================================
+        //  FETCH HELPER
+        // ============================================================
         async function fetchJSON(url) {
             const res = await fetch(url);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             return res.json();
         }
 
-        // ---------- RENDER CARD ----------
+        // ============================================================
+        //  RENDER CARD
+        // ============================================================
         function renderCard(series) {
             const cover = series.data.coverImage || '';
             const title = series.data.title || 'Untitled';
             const slug = series.data.slug || '#';
             const totalCh = series.data.totalChapters || '?';
             const rating = series.data.rating || 0;
-            const link = `#/series/${slug}`;
+            const format = series.data.format || '';
 
             return `
-                <div class="card" onclick="window.location='${link}'">
+                <div class="card" onclick="navigateTo('detail','${slug}')">
                     <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 300%22%3E%3Crect fill=%22%23141a22%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%236b7a8d%22 font-family=%22sans-serif%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
                     <div class="card-body">
                         <h4>${title}</h4>
                         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
-                            <span class="chapters">Ch ${totalCh}</span>
+                            <span class="chapters">${format} • Ch ${totalCh}</span>
                             <span class="rating">⭐ ${rating}</span>
                         </div>
                     </div>
@@ -378,17 +695,18 @@
             `;
         }
 
-        // ---------- RENDER BANNER ----------
+        // ============================================================
+        //  RENDER BANNER
+        // ============================================================
         function renderBanner(banner) {
             const cover = banner.data.coverImage || '';
             const bg = banner.data.backgroundImage || cover;
             const title = banner.data.title || 'Untitled';
             const slug = banner.data.slug || '#';
             const format = banner.data.format || 'Komik';
-            const link = `#/series/${slug}`;
 
             return `
-                <div class="banner-item" onclick="window.location='${link}'">
+                <div class="banner-item" onclick="navigateTo('detail','${slug}')">
                     <img src="${bg || cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22%3E%3Crect fill=%22%23141a22%22 width=%22400%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%236b7a8d%22 font-family=%22sans-serif%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBanner%3C/text%3E%3C/svg%3E'" />
                     <div class="banner-info">
                         <h3>${title}</h3>
@@ -401,17 +719,27 @@
             `;
         }
 
-        // ---------- LOAD DATA ----------
-        async function loadSection(endpoint, containerId, renderFn, take = 10) {
+        // ============================================================
+        //  LOAD SECTION (dengan query parameter)
+        // ============================================================
+        async function loadSection(endpoint, containerId, renderFn, take = 10, extraParams = '') {
             const container = document.getElementById(containerId);
             try {
-                const url = endpoint.includes('?') ? endpoint : `${endpoint}?take=${take}`;
+                // Pastikan menggunakan query parameter dengan benar
+                let url = endpoint;
+                if (!url.includes('?')) {
+                    url += '?';
+                } else {
+                    url += '&';
+                }
+                url += `take=${take}${extraParams}`;
+
                 const json = await fetchJSON(url);
                 const items = json.data || [];
 
                 if (!items.length) {
                     container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;color:#6b7a8d;padding:30px;">Tidak ada data.</div>`;
+                        `<div style="grid-column:1/-1;text-align:center;color:#6b7a8d;padding:30px;">Tidak ada data.</div>`;
                     return;
                 }
 
@@ -423,36 +751,281 @@
             }
         }
 
-        // ---------- LOAD ALL ----------
-        async function loadAll() {
-            // BANNER
-            await loadSection(`${API_BASE}/banners`, 'bannerSlider', renderBanner, 20);
+        // ============================================================
+        //  LOAD BROWSE (dengan pagination query parameter)
+        // ============================================================
+        async function loadBrowse(page = 1) {
+            const container = document.getElementById('browseGrid');
+            const pagination = document.getElementById('browsePagination');
+            const countEl = document.getElementById('browseCount');
 
-            // POPULAR (take 10)
-            await loadSection(`${API_BASE}/series/popular?take=10&take_chapter=2`, 'popularGrid', renderCard);
+            container.innerHTML = `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat komik...</span></div>`;
 
-            // LATEST (take 20)
-            await loadSection(`${API_BASE}/series/latest?take=20&take_chapter=3&page=1`, 'latestGrid', renderCard, 20);
+            try {
+                // Gunakan query parameter page & take
+                const url =
+                    `${API_BASE}/series/browse?sort=latest&sort_order=desc&take=12&page=${page}&take_chapter=2`;
+                const json = await fetchJSON(url);
+                const items = json.data || [];
+                const total = json.metadata?.total || items.length;
 
-            // RECOMMENDATIONS (take 10)
-            await loadSection(`${API_BASE}/series/recommendations?take=10&page=1&method=all`, 'recommendGrid', renderCard);
+                countEl.textContent = `halaman ${page}`;
 
-            // TRENDING (take 10)
-            await loadSection(`${API_BASE}/series/trending?take=10&page=1`, 'trendingGrid', renderCard);
+                if (!items.length) {
+                    container.innerHTML =
+                        `<div style="grid-column:1/-1;text-align:center;color:#6b7a8d;padding:30px;">Tidak ada komik.</div>`;
+                    pagination.innerHTML = '';
+                    return;
+                }
 
-            // MOST BOOKMARKED (take 10)
-            await loadSection(`${API_BASE}/series/most-bookmarked?take=10&page=1`, 'bookmarkGrid', renderCard);
+                container.innerHTML = items.map(renderCard).join('');
+
+                // Pagination
+                const totalPages = Math.ceil(total / 12) || 1;
+                currentBrowsePage = page;
+                let html = '';
+                html += `<button onclick="loadBrowse(${page-1})" ${page<=1?'disabled':''}>◀</button>`;
+                for (let i = 1; i <= Math.min(totalPages, 10); i++) {
+                    html += `<button onclick="loadBrowse(${i})" class="${i===page?'active':''}">${i}</button>`;
+                }
+                if (totalPages > 10) {
+                    html += `<span style="color:#6b7a8d;">...</span>`;
+                    html += `<button onclick="loadBrowse(${totalPages})">${totalPages}</button>`;
+                }
+                html += `<button onclick="loadBrowse(${page+1})" ${page>=totalPages?'disabled':''}>▶</button>`;
+                pagination.innerHTML = html;
+
+            } catch (err) {
+                console.error('Error loading browse:', err);
+                container.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal memuat komik.</div>`;
+            }
         }
 
-        // ---------- SEARCH ----------
+        // ============================================================
+        //  LOAD DETAIL
+        // ============================================================
+        async function loadDetail(slug) {
+            currentSlug = slug;
+            const content = document.getElementById('detailContent');
+            const chapterList = document.getElementById('chapterList');
+            const chapterPagination = document.getElementById('chapterPagination');
+
+            content.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat detail...</span></div>`;
+            chapterList.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat chapter...</span></div>`;
+
+            try {
+                // Detail series
+                const detailUrl = `${API_BASE}/series/${slug}`;
+                const detailJson = await fetchJSON(detailUrl);
+                const series = detailJson.data;
+
+                if (!series) throw new Error('Series not found');
+
+                const cover = series.data.coverImage || '';
+                const title = series.data.title || 'Untitled';
+                const author = series.data.author || 'Unknown';
+                const format = series.data.format || '';
+                const status = series.data.status || 'unknown';
+                const synopsis = series.data.synopsis || 'Tidak ada sinopsis.';
+                const genres = series.data.genres || [];
+                const rating = series.data.rating || 0;
+                const totalCh = series.data.totalChapters || '?';
+                const bookmarkCount = series.metadata?.bookmarkCount || 0;
+                const views = series.metadata?.views?.total || 0;
+
+                content.innerHTML = `
+                    <div class="detail-hero">
+                        <img src="${cover}" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 300%22%3E%3Crect fill=%22%23141a22%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 fill=%22%236b7a8d%22 font-family=%22sans-serif%22 font-size=%2216%22 text-anchor=%22middle%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
+                        <div class="detail-info">
+                            <h1>${title}</h1>
+                            <div class="sub">${author} • ${format} • ${status}</div>
+                            <div class="genres">
+                                ${genres.map(g => `<span>${g.data?.name || g.name || 'Unknown'}</span>`).join('')}
+                            </div>
+                            <div class="synopsis">${synopsis}</div>
+                            <div class="stats">
+                                <span>⭐ <strong>${rating}</strong></span>
+                                <span>📖 <strong>${totalCh}</strong> chapter</span>
+                                <span>🔖 <strong>${bookmarkCount}</strong></span>
+                                <span>👁️ <strong>${views}</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Load chapters (dengan pagination query parameter)
+                await loadChapters(slug, 1);
+
+            } catch (err) {
+                console.error('Error loading detail:', err);
+                content.innerHTML =
+                    `<div class="error">❌ Gagal memuat detail komik. ${err.message}</div>`;
+                chapterList.innerHTML = '';
+            }
+        }
+
+        // ============================================================
+        //  LOAD CHAPTERS (dengan pagination query parameter)
+        // ============================================================
+        async function loadChapters(slug, page = 1) {
+            const chapterList = document.getElementById('chapterList');
+            const chapterPagination = document.getElementById('chapterPagination');
+
+            chapterList.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat chapter...</span></div>`;
+
+            try {
+                // Gunakan query parameter page & take
+                const url = `${API_BASE}/series/${slug}/chapters?take=20&page=${page}`;
+                const json = await fetchJSON(url);
+                const chapters = json.data || [];
+                const total = json.metadata?.total || chapters.length;
+
+                if (!chapters.length) {
+                    chapterList.innerHTML =
+                        `<div style="padding:20px;text-align:center;color:#6b7a8d;">Belum ada chapter.</div>`;
+                    chapterPagination.innerHTML = '';
+                    return;
+                }
+
+                currentChapters = chapters;
+                currentChapterIndex = 0;
+
+                chapterList.innerHTML = chapters.map((ch, idx) => {
+                    const index = ch.chapterIndex || ch.index || idx + 1;
+                    const title = ch.data?.title || `Chapter ${index}`;
+                    const date = ch.createdAt ? new Date(ch.createdAt).toLocaleDateString('id-ID') : '';
+                    return `
+                        <div class="chapter-item" onclick="navigateTo('reader', {slug:'${slug}', index:${index}})">
+                            <span class="ch-title">${title}</span>
+                            <span class="ch-meta">${date}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                // Pagination chapters
+                const totalPages = Math.ceil(total / 20) || 1;
+                let html = '';
+                html += `<button onclick="loadChapters('${slug}', ${page-1})" ${page<=1?'disabled':''}>◀</button>`;
+                for (let i = 1; i <= Math.min(totalPages, 10); i++) {
+                    html += `<button onclick="loadChapters('${slug}', ${i})" class="${i===page?'active':''}">${i}</button>`;
+                }
+                if (totalPages > 10) {
+                    html += `<span style="color:#6b7a8d;">...</span>`;
+                    html += `<button onclick="loadChapters('${slug}', ${totalPages})">${totalPages}</button>`;
+                }
+                html += `<button onclick="loadChapters('${slug}', ${page+1})" ${page>=totalPages?'disabled':''}>▶</button>`;
+                chapterPagination.innerHTML = html;
+
+            } catch (err) {
+                console.error('Error loading chapters:', err);
+                chapterList.innerHTML =
+                    `<div style="padding:20px;text-align:center;color:#ef4444;">❌ Gagal memuat chapter.</div>`;
+            }
+        }
+
+        // ============================================================
+        //  LOAD READER
+        // ============================================================
+        async function loadReader(slug, index) {
+            currentSlug = slug;
+            currentChapterIndex = index;
+
+            const content = document.getElementById('readerContent');
+            const info = document.getElementById('readerInfo');
+            const navInfo = document.getElementById('readerNavInfo');
+
+            content.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat gambar...</span></div>`;
+            info.textContent = `Chapter ${index}`;
+
+            try {
+                const url = `${API_BASE}/series/${slug}/chapters/${index}`;
+                const json = await fetchJSON(url);
+                const chapter = json.data;
+
+                if (!chapter) throw new Error('Chapter not found');
+
+                const images = chapter.dataImages || {};
+                const imageUrls = Object.values(images).filter(url => url && url.trim() !== '');
+
+                if (!imageUrls.length) {
+                    content.innerHTML =
+                        `<div style="text-align:center;padding:40px;color:#6b7a8d;">Tidak ada gambar untuk chapter ini.</div>`;
+                    return;
+                }
+
+                // Cari posisi chapter di daftar
+                const chIdx = currentChapters.findIndex(c => c.chapterIndex === index);
+                const totalCh = currentChapters.length;
+
+                // Update navigasi
+                document.getElementById('prevChapterBtn').disabled = (chIdx <= 0);
+                document.getElementById('nextChapterBtn').disabled = (chIdx >= totalCh - 1);
+
+                if (totalCh > 0 && chIdx >= 0) {
+                    const prevIdx = chIdx > 0 ? currentChapters[chIdx - 1].chapterIndex : null;
+                    const nextIdx = chIdx < totalCh - 1 ? currentChapters[chIdx + 1].chapterIndex : null;
+                    navInfo.textContent =
+                        `${chIdx+1} / ${totalCh} • ${prevIdx !== null ? '⬅ Ch'+prevIdx : ''} ${nextIdx !== null ? '➡ Ch'+nextIdx : ''}`;
+                } else {
+                    navInfo.textContent = `Chapter ${index}`;
+                }
+
+                // Render gambar
+                content.innerHTML = imageUrls.map(url =>
+                    `<img src="${url}" alt="Page" loading="lazy" onerror="this.style.display='none'" />`
+                ).join('');
+
+                // Simpan info untuk navigasi
+                const chIndex = currentChapters.findIndex(c => c.chapterIndex === index);
+                if (chIndex >= 0) {
+                    currentChapterIndex = chIndex;
+                }
+
+            } catch (err) {
+                console.error('Error loading reader:', err);
+                content.innerHTML =
+                    `<div class="error">❌ Gagal memuat chapter. ${err.message}</div>`;
+            }
+        }
+
+        // ============================================================
+        //  READER NAVIGATION
+        // ============================================================
+        function closeReader() {
+            navigateTo('detail', currentSlug);
+        }
+
+        function prevChapter() {
+            const chIdx = currentChapters.findIndex(c => c.chapterIndex === currentChapterIndex);
+            if (chIdx > 0) {
+                const prev = currentChapters[chIdx - 1];
+                currentChapterIndex = prev.chapterIndex;
+                loadReader(currentSlug, prev.chapterIndex);
+            }
+        }
+
+        function nextChapter() {
+            const chIdx = currentChapters.findIndex(c => c.chapterIndex === currentChapterIndex);
+            if (chIdx < currentChapters.length - 1) {
+                const next = currentChapters[chIdx + 1];
+                currentChapterIndex = next.chapterIndex;
+                loadReader(currentSlug, next.chapterIndex);
+            }
+        }
+
+        // ============================================================
+        //  SEARCH (dengan query parameter)
+        // ============================================================
         async function handleSearch() {
             const q = document.getElementById('searchInput').value.trim();
             if (!q) return alert('Masukkan judul komik yang ingin dicari.');
 
-            const container = document.getElementById('popularGrid'); // reuse popular grid
+            const container = document.getElementById('popularGrid');
             container.innerHTML = `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Mencari "${q}"...</span></div>`;
 
             try {
+                // Gunakan query parameter q
                 const url =
                 `${API_BASE}/series/search?take=12&page=1&take_chapter=2&q=${encodeURIComponent(q)}`;
                 const json = await fetchJSON(url);
@@ -464,17 +1037,13 @@
                     return;
                 }
 
-                // scroll ke hasil
                 document.querySelector('.section-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                // update title sementara
                 const titleEl = document.querySelector('.section-title');
                 const origTitle = titleEl.innerHTML;
                 titleEl.innerHTML = `🔍 Hasil untuk "${q}" <span class="badge">${items.length} ditemukan</span>`;
 
                 container.innerHTML = items.map(renderCard).join('');
 
-                // restore title after a while? biarkan saja.
             } catch (err) {
                 console.error(err);
                 container.innerHTML =
@@ -482,13 +1051,44 @@
             }
         }
 
-        // ---------- EVENT LISTENERS ----------
+        // ============================================================
+        //  LOAD ALL HOME DATA
+        // ============================================================
+        async function loadAll() {
+            // BANNER
+            await loadSection(`${API_BASE}/banners`, 'bannerSlider', renderBanner, 20, '');
+
+            // POPULAR
+            await loadSection(`${API_BASE}/series/popular`, 'popularGrid', renderCard, 10, '&take_chapter=2');
+
+            // LATEST
+            await loadSection(`${API_BASE}/series/latest`, 'latestGrid', renderCard, 20, '&take_chapter=3&page=1');
+
+            // RECOMMENDATIONS
+            await loadSection(`${API_BASE}/series/recommendations`, 'recommendGrid', renderCard, 10,
+            '&page=1&method=all');
+
+            // TRENDING
+            await loadSection(`${API_BASE}/series/trending`, 'trendingGrid', renderCard, 10, '&page=1');
+
+            // MOST BOOKMARKED
+            await loadSection(`${API_BASE}/series/most-bookmarked`, 'bookmarkGrid', renderCard, 10, '&page=1');
+
+            // BROWSE (pagination)
+            await loadBrowse(1);
+        }
+
+        // ============================================================
+        //  EVENT LISTENERS
+        // ============================================================
         document.getElementById('searchBtn').addEventListener('click', handleSearch);
         document.getElementById('searchInput').addEventListener('keydown', (e) => {
             if (e.key === 'Enter') handleSearch();
         });
 
-        // ---------- START ----------
+        // ============================================================
+        //  START
+        // ============================================================
         loadAll();
     </script>
 </body>
