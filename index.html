@@ -24,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* HEADER */
         header {
             padding: 20px 0;
             border-bottom: 1px solid #1e2630;
@@ -100,8 +99,12 @@
         .back-btn:hover {
             background: #1e2630;
         }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
-        /* BANNER SLIDER */
         .banner-section {
             margin: 30px 0 40px;
         }
@@ -171,7 +174,6 @@
             font-size: 11px;
         }
 
-        /* SECTION TITLE */
         .section-title {
             font-size: 20px;
             font-weight: 700;
@@ -189,7 +191,6 @@
             border-radius: 20px;
         }
 
-        /* GRID KOMIK */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -235,7 +236,6 @@
             font-weight: 600;
         }
 
-        /* LOADING */
         .loading {
             text-align: center;
             padding: 60px 20px;
@@ -255,14 +255,12 @@
                 transform: rotate(360deg);
             }
         }
-
         .error {
             text-align: center;
             padding: 40px;
             color: #ef4444;
         }
 
-        /* DETAIL PAGE */
         .detail-page {
             display: none;
             padding: 20px 0;
@@ -337,7 +335,6 @@
             color: #e8edf5;
         }
 
-        /* CHAPTER LIST */
         .chapter-list {
             background: #141a22;
             border-radius: 16px;
@@ -367,7 +364,6 @@
             font-size: 13px;
         }
 
-        /* CHAPTER READER */
         .reader-page {
             display: none;
             padding: 20px 0;
@@ -422,7 +418,6 @@
             background: #2a3440;
         }
 
-        /* PAGINATION */
         .pagination {
             display: flex;
             justify-content: center;
@@ -451,7 +446,6 @@
             cursor: not-allowed;
         }
 
-        /* RESPONSIVE */
         @media (max-width: 640px) {
             .grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -500,9 +494,8 @@
 <body>
     <div class="container">
 
-        <!-- HEADER -->
         <header>
-            <div style="display:flex;align-items:center;gap:16px;">
+            <div class="header-left">
                 <div class="logo" onclick="navigateTo('home')">Komik<span>cast</span></div>
                 <button class="back-btn" id="backBtn" onclick="goBack()">← Kembali</button>
             </div>
@@ -512,10 +505,8 @@
             </div>
         </header>
 
-        <!-- HOME PAGE -->
+        <!-- HOME -->
         <div class="home-page" id="homePage">
-
-            <!-- BANNER -->
             <section class="banner-section">
                 <div class="banner-slider" id="bannerSlider">
                     <div class="loading" style="width:100%; padding:20px;">
@@ -525,64 +516,39 @@
                 </div>
             </section>
 
-            <!-- POPULAR -->
             <div class="section-title">🔥 Populer <span class="badge">minggu ini</span></div>
             <div class="grid" id="popularGrid">
-                <div class="loading" style="grid-column:1/-1;">
-                    <div class="spinner"></div>
-                    <span>Memuat...</span>
-                </div>
+                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
 
-            <!-- LATEST -->
             <div class="section-title">🆕 Terbaru</div>
             <div class="grid" id="latestGrid">
-                <div class="loading" style="grid-column:1/-1;">
-                    <div class="spinner"></div>
-                    <span>Memuat...</span>
-                </div>
+                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
 
-            <!-- RECOMMENDATIONS -->
             <div class="section-title">⭐ Rekomendasi</div>
             <div class="grid" id="recommendGrid">
-                <div class="loading" style="grid-column:1/-1;">
-                    <div class="spinner"></div>
-                    <span>Memuat...</span>
-                </div>
+                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
 
-            <!-- TRENDING -->
             <div class="section-title">📈 Trending</div>
             <div class="grid" id="trendingGrid">
-                <div class="loading" style="grid-column:1/-1;">
-                    <div class="spinner"></div>
-                    <span>Memuat...</span>
-                </div>
+                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
 
-            <!-- MOST BOOKMARKED -->
             <div class="section-title">🔖 Terbanyak di-bookmark</div>
             <div class="grid" id="bookmarkGrid">
-                <div class="loading" style="grid-column:1/-1;">
-                    <div class="spinner"></div>
-                    <span>Memuat...</span>
-                </div>
+                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
 
-            <!-- PAGINATION UNTUK BROWSE -->
             <div class="section-title">📚 Semua Komik <span class="badge" id="browseCount">halaman 1</span></div>
             <div class="grid" id="browseGrid">
-                <div class="loading" style="grid-column:1/-1;">
-                    <div class="spinner"></div>
-                    <span>Memuat...</span>
-                </div>
+                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
             <div class="pagination" id="browsePagination"></div>
-
         </div>
 
-        <!-- DETAIL PAGE -->
+        <!-- DETAIL -->
         <div class="detail-page" id="detailPage">
             <div id="detailContent">
                 <div class="loading"><div class="spinner"></div><span>Memuat detail...</span></div>
@@ -594,7 +560,7 @@
             <div class="pagination" id="chapterPagination"></div>
         </div>
 
-        <!-- READER PAGE -->
+        <!-- READER -->
         <div class="reader-page" id="readerPage">
             <div class="reader-container">
                 <div class="reader-nav">
@@ -605,9 +571,9 @@
                     <div class="loading"><div class="spinner"></div><span>Memuat gambar...</span></div>
                 </div>
                 <div class="reader-nav">
-                    <button id="prevChapterBtn" onclick="prevChapter()">⬅ Chapter Sebelumnya</button>
+                    <button id="prevChapterBtn" onclick="prevChapter()">⬅ Sebelumnya</button>
                     <span class="info" id="readerNavInfo">-</span>
-                    <button id="nextChapterBtn" onclick="nextChapter()">Chapter Selanjutnya ➡</button>
+                    <button id="nextChapterBtn" onclick="nextChapter()">Selanjutnya ➡</button>
                 </div>
             </div>
         </div>
@@ -616,19 +582,15 @@
 
     <script>
         // ============================================================
-        //  BASE URL & STATE
-        // ============================================================
         const API_BASE = 'https://kcastapi.bani.biz.id';
 
         let currentSlug = null;
         let currentChapters = [];
         let currentChapterIndex = 0;
-        let currentPage = 1;
-        let totalBrowsePages = 1;
         let currentBrowsePage = 1;
 
         // ============================================================
-        //  NAVIGATION
+        // NAVIGATION
         // ============================================================
         function navigateTo(page, data) {
             document.getElementById('homePage').classList.toggle('hidden', page !== 'home');
@@ -636,18 +598,14 @@
             document.getElementById('readerPage').classList.toggle('active', page === 'reader');
             document.getElementById('backBtn').style.display = (page === 'home') ? 'none' : 'inline-block';
 
-            if (page === 'home') {
-                document.querySelector('.logo').style.display = 'inline-block';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                document.querySelector('.logo').style.display = 'inline-block';
-            }
-
             if (page === 'detail' && data) {
                 loadDetail(data);
             }
             if (page === 'reader' && data) {
                 loadReader(data.slug, data.index);
+            }
+            if (page === 'home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
 
@@ -661,8 +619,12 @@
             }
         }
 
+        function closeReader() {
+            navigateTo('detail', currentSlug);
+        }
+
         // ============================================================
-        //  FETCH HELPER
+        // FETCH
         // ============================================================
         async function fetchJSON(url) {
             const res = await fetch(url);
@@ -671,15 +633,15 @@
         }
 
         // ============================================================
-        //  RENDER CARD
+        // RENDER CARD
         // ============================================================
         function renderCard(series) {
-            const cover = series.data.coverImage || '';
-            const title = series.data.title || 'Untitled';
-            const slug = series.data.slug || '#';
-            const totalCh = series.data.totalChapters || '?';
-            const rating = series.data.rating || 0;
-            const format = series.data.format || '';
+            const cover = series.data?.coverImage || '';
+            const title = series.data?.title || 'Untitled';
+            const slug = series.data?.slug || '#';
+            const totalCh = series.data?.totalChapters || '?';
+            const rating = series.data?.rating || 0;
+            const format = series.data?.format || '';
 
             return `
                 <div class="card" onclick="navigateTo('detail','${slug}')">
@@ -696,14 +658,14 @@
         }
 
         // ============================================================
-        //  RENDER BANNER
+        // RENDER BANNER
         // ============================================================
         function renderBanner(banner) {
-            const cover = banner.data.coverImage || '';
-            const bg = banner.data.backgroundImage || cover;
-            const title = banner.data.title || 'Untitled';
-            const slug = banner.data.slug || '#';
-            const format = banner.data.format || 'Komik';
+            const cover = banner.data?.coverImage || '';
+            const bg = banner.data?.backgroundImage || cover;
+            const title = banner.data?.title || 'Untitled';
+            const slug = banner.data?.slug || '#';
+            const format = banner.data?.format || 'Komik';
 
             return `
                 <div class="banner-item" onclick="navigateTo('detail','${slug}')">
@@ -720,19 +682,15 @@
         }
 
         // ============================================================
-        //  LOAD SECTION (dengan query parameter)
+        // LOAD SECTION
         // ============================================================
-        async function loadSection(endpoint, containerId, renderFn, take = 10, extraParams = '') {
+        async function loadSection(endpoint, containerId, renderFn, take = 10, extra = '') {
             const container = document.getElementById(containerId);
             try {
-                // Pastikan menggunakan query parameter dengan benar
                 let url = endpoint;
-                if (!url.includes('?')) {
-                    url += '?';
-                } else {
-                    url += '&';
-                }
-                url += `take=${take}${extraParams}`;
+                if (!url.includes('?')) url += '?';
+                else url += '&';
+                url += `take=${take}${extra}`;
 
                 const json = await fetchJSON(url);
                 const items = json.data || [];
@@ -742,27 +700,25 @@
                         `<div style="grid-column:1/-1;text-align:center;color:#6b7a8d;padding:30px;">Tidak ada data.</div>`;
                     return;
                 }
-
                 container.innerHTML = items.map(renderFn).join('');
             } catch (err) {
                 console.error(`Error loading ${containerId}:`, err);
                 container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal memuat data. Coba refresh.</div>`;
+                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal memuat data.</div>`;
             }
         }
 
         // ============================================================
-        //  LOAD BROWSE (dengan pagination query parameter)
+        // LOAD BROWSE
         // ============================================================
         async function loadBrowse(page = 1) {
             const container = document.getElementById('browseGrid');
             const pagination = document.getElementById('browsePagination');
             const countEl = document.getElementById('browseCount');
 
-            container.innerHTML = `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat komik...</span></div>`;
+            container.innerHTML = `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>`;
 
             try {
-                // Gunakan query parameter page & take
                 const url =
                     `${API_BASE}/series/browse?sort=latest&sort_order=desc&take=12&page=${page}&take_chapter=2`;
                 const json = await fetchJSON(url);
@@ -780,7 +736,6 @@
 
                 container.innerHTML = items.map(renderCard).join('');
 
-                // Pagination
                 const totalPages = Math.ceil(total / 12) || 1;
                 currentBrowsePage = page;
                 let html = '';
@@ -798,12 +753,12 @@
             } catch (err) {
                 console.error('Error loading browse:', err);
                 container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal memuat komik.</div>`;
+                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal memuat.</div>`;
             }
         }
 
         // ============================================================
-        //  LOAD DETAIL
+        // LOAD DETAIL
         // ============================================================
         async function loadDetail(slug) {
             currentSlug = slug;
@@ -813,24 +768,24 @@
 
             content.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat detail...</span></div>`;
             chapterList.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat chapter...</span></div>`;
+            chapterPagination.innerHTML = '';
 
             try {
-                // Detail series
                 const detailUrl = `${API_BASE}/series/${slug}`;
                 const detailJson = await fetchJSON(detailUrl);
                 const series = detailJson.data;
 
                 if (!series) throw new Error('Series not found');
 
-                const cover = series.data.coverImage || '';
-                const title = series.data.title || 'Untitled';
-                const author = series.data.author || 'Unknown';
-                const format = series.data.format || '';
-                const status = series.data.status || 'unknown';
-                const synopsis = series.data.synopsis || 'Tidak ada sinopsis.';
-                const genres = series.data.genres || [];
-                const rating = series.data.rating || 0;
-                const totalCh = series.data.totalChapters || '?';
+                const cover = series.data?.coverImage || '';
+                const title = series.data?.title || 'Untitled';
+                const author = series.data?.author || 'Unknown';
+                const format = series.data?.format || '';
+                const status = series.data?.status || 'unknown';
+                const synopsis = series.data?.synopsis || 'Tidak ada sinopsis.';
+                const genres = series.data?.genres || [];
+                const rating = series.data?.rating || 0;
+                const totalCh = series.data?.totalChapters || '?';
                 const bookmarkCount = series.metadata?.bookmarkCount || 0;
                 const views = series.metadata?.views?.total || 0;
 
@@ -854,7 +809,6 @@
                     </div>
                 `;
 
-                // Load chapters (dengan pagination query parameter)
                 await loadChapters(slug, 1);
 
             } catch (err) {
@@ -866,7 +820,7 @@
         }
 
         // ============================================================
-        //  LOAD CHAPTERS (dengan pagination query parameter)
+        // LOAD CHAPTERS
         // ============================================================
         async function loadChapters(slug, page = 1) {
             const chapterList = document.getElementById('chapterList');
@@ -875,7 +829,6 @@
             chapterList.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat chapter...</span></div>`;
 
             try {
-                // Gunakan query parameter page & take
                 const url = `${API_BASE}/series/${slug}/chapters?take=20&page=${page}`;
                 const json = await fetchJSON(url);
                 const chapters = json.data || [];
@@ -889,10 +842,9 @@
                 }
 
                 currentChapters = chapters;
-                currentChapterIndex = 0;
 
-                chapterList.innerHTML = chapters.map((ch, idx) => {
-                    const index = ch.chapterIndex || ch.index || idx + 1;
+                chapterList.innerHTML = chapters.map((ch) => {
+                    const index = ch.chapterIndex || ch.index || 0;
                     const title = ch.data?.title || `Chapter ${index}`;
                     const date = ch.createdAt ? new Date(ch.createdAt).toLocaleDateString('id-ID') : '';
                     return `
@@ -903,7 +855,6 @@
                     `;
                 }).join('');
 
-                // Pagination chapters
                 const totalPages = Math.ceil(total / 20) || 1;
                 let html = '';
                 html += `<button onclick="loadChapters('${slug}', ${page-1})" ${page<=1?'disabled':''}>◀</button>`;
@@ -925,7 +876,7 @@
         }
 
         // ============================================================
-        //  LOAD READER
+        // LOAD READER - FIXED!
         // ============================================================
         async function loadReader(slug, index) {
             currentSlug = slug;
@@ -945,141 +896,151 @@
 
                 if (!chapter) throw new Error('Chapter not found');
 
-                const images = chapter.dataImages || {};
-                const imageUrls = Object.values(images).filter(url => url && url.trim() !== '');
+                // ========== FIX: Ambil images dari chapter.data.images ==========
+                let imageUrls = [];
+
+                // Coba dari chapter.data.images (array)
+                if (chapter.data?.images && Array.isArray(chapter.data.images)) {
+                    imageUrls = chapter.data.images.filter(url => url && url.trim() !== '');
+                }
+
+                // Coba dari chapter.dataImages (object) - fallback
+                if (!imageUrls.length && chapter.dataImages) {
+                    imageUrls = Object.values(chapter.dataImages).filter(url => url && url.trim() !== '');
+                }
+
+                // Coba dari chapter.images - fallback
+                if (!imageUrls.length && chapter.images && Array.isArray(chapter.images)) {
+                    imageUrls = chapter.images.filter(url => url && url.trim() !== '');
+                }
+
+                // Coba dari chapter.data.dataImages - fallback
+                if (!imageUrls.length && chapter.data?.dataImages) {
+                    imageUrls = Object.values(chapter.data.dataImages).filter(url => url && url.trim() !== '');
+                }
+
+                console.log('Image URLs found:', imageUrls.length); // Debug
 
                 if (!imageUrls.length) {
-                    content.innerHTML =
-                        `<div style="text-align:center;padding:40px;color:#6b7a8d;">Tidak ada gambar untuk chapter ini.</div>`;
+                    content.innerHTML = `
+                        <div style="text-align:center;padding:40px;color:#6b7a8d;background:#141a22;border-radius:16px;border:1px solid #1e2630;">
+                            <div style="font-size:48px;margin-bottom:16px;">🖼️</div>
+                            <p>Tidak ada gambar untuk chapter ini.</p>
+                            <p style="font-size:13px;margin-top:8px;color:#4a5568;">Chapter ${index}</p>
+                        </div>
+                    `;
                     return;
                 }
 
                 // Cari posisi chapter di daftar
-                const chIdx = currentChapters.findIndex(c => c.chapterIndex === index);
+                const chIdx = currentChapters.findIndex(c => (c.chapterIndex || c.index) === index);
                 const totalCh = currentChapters.length;
 
-                // Update navigasi
                 document.getElementById('prevChapterBtn').disabled = (chIdx <= 0);
                 document.getElementById('nextChapterBtn').disabled = (chIdx >= totalCh - 1);
 
                 if (totalCh > 0 && chIdx >= 0) {
-                    const prevIdx = chIdx > 0 ? currentChapters[chIdx - 1].chapterIndex : null;
-                    const nextIdx = chIdx < totalCh - 1 ? currentChapters[chIdx + 1].chapterIndex : null;
+                    const prevIdx = chIdx > 0 ? (currentChapters[chIdx - 1].chapterIndex || currentChapters[chIdx - 1]
+                        .index) : null;
+                    const nextIdx = chIdx < totalCh - 1 ? (currentChapters[chIdx + 1].chapterIndex || currentChapters[
+                        chIdx + 1].index) : null;
                     navInfo.textContent =
-                        `${chIdx+1} / ${totalCh} • ${prevIdx !== null ? '⬅ Ch'+prevIdx : ''} ${nextIdx !== null ? '➡ Ch'+nextIdx : ''}`;
+                        `${chIdx+1} / ${totalCh} ${prevIdx !== null ? '• ⬅ Ch'+prevIdx : ''} ${nextIdx !== null ? '• ➡ Ch'+nextIdx : ''}`;
                 } else {
                     navInfo.textContent = `Chapter ${index}`;
                 }
 
                 // Render gambar
-                content.innerHTML = imageUrls.map(url =>
-                    `<img src="${url}" alt="Page" loading="lazy" onerror="this.style.display='none'" />`
+                content.innerHTML = imageUrls.map((url, i) =>
+                    `<img src="${url}" alt="Page ${i+1}" loading="lazy" onerror="this.style.display='none'" />`
                 ).join('');
-
-                // Simpan info untuk navigasi
-                const chIndex = currentChapters.findIndex(c => c.chapterIndex === index);
-                if (chIndex >= 0) {
-                    currentChapterIndex = chIndex;
-                }
 
             } catch (err) {
                 console.error('Error loading reader:', err);
-                content.innerHTML =
-                    `<div class="error">❌ Gagal memuat chapter. ${err.message}</div>`;
+                content.innerHTML = `
+                    <div style="text-align:center;padding:40px;color:#ef4444;background:#141a22;border-radius:16px;border:1px solid #1e2630;">
+                        <div style="font-size:48px;margin-bottom:16px;">❌</div>
+                        <p>Gagal memuat chapter.</p>
+                        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">${err.message}</p>
+                    </div>
+                `;
             }
         }
 
         // ============================================================
-        //  READER NAVIGATION
+        // READER NAVIGATION
         // ============================================================
-        function closeReader() {
-            navigateTo('detail', currentSlug);
-        }
-
         function prevChapter() {
-            const chIdx = currentChapters.findIndex(c => c.chapterIndex === currentChapterIndex);
+            const chIdx = currentChapters.findIndex(c => (c.chapterIndex || c.index) === currentChapterIndex);
             if (chIdx > 0) {
                 const prev = currentChapters[chIdx - 1];
-                currentChapterIndex = prev.chapterIndex;
-                loadReader(currentSlug, prev.chapterIndex);
+                const idx = prev.chapterIndex || prev.index;
+                currentChapterIndex = idx;
+                loadReader(currentSlug, idx);
             }
         }
 
         function nextChapter() {
-            const chIdx = currentChapters.findIndex(c => c.chapterIndex === currentChapterIndex);
+            const chIdx = currentChapters.findIndex(c => (c.chapterIndex || c.index) === currentChapterIndex);
             if (chIdx < currentChapters.length - 1) {
                 const next = currentChapters[chIdx + 1];
-                currentChapterIndex = next.chapterIndex;
-                loadReader(currentSlug, next.chapterIndex);
+                const idx = next.chapterIndex || next.index;
+                currentChapterIndex = idx;
+                loadReader(currentSlug, idx);
             }
         }
 
         // ============================================================
-        //  SEARCH (dengan query parameter)
+        // SEARCH
         // ============================================================
         async function handleSearch() {
             const q = document.getElementById('searchInput').value.trim();
-            if (!q) return alert('Masukkan judul komik yang ingin dicari.');
+            if (!q) return alert('Masukkan judul komik.');
 
             const container = document.getElementById('popularGrid');
-            container.innerHTML = `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Mencari "${q}"...</span></div>`;
+            container.innerHTML =
+                `<div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Mencari "${q}"...</span></div>`;
 
             try {
-                // Gunakan query parameter q
                 const url =
-                `${API_BASE}/series/search?take=12&page=1&take_chapter=2&q=${encodeURIComponent(q)}`;
+                    `${API_BASE}/series/search?take=12&page=1&take_chapter=2&q=${encodeURIComponent(q)}`;
                 const json = await fetchJSON(url);
                 const items = json.data || [];
 
                 if (!items.length) {
                     container.innerHTML =
-                        `<div style="grid-column:1/-1;text-align:center;color:#8a9aa8;padding:40px;">😕 Tidak ditemukan komik dengan judul "${q}".</div>`;
+                        `<div style="grid-column:1/-1;text-align:center;color:#8a9aa8;padding:40px;">😕 Tidak ditemukan "${q}".</div>`;
                     return;
                 }
 
                 document.querySelector('.section-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 const titleEl = document.querySelector('.section-title');
-                const origTitle = titleEl.innerHTML;
-                titleEl.innerHTML = `🔍 Hasil untuk "${q}" <span class="badge">${items.length} ditemukan</span>`;
-
+                titleEl.innerHTML = `🔍 Hasil "${q}" <span class="badge">${items.length}</span>`;
                 container.innerHTML = items.map(renderCard).join('');
 
             } catch (err) {
                 console.error(err);
                 container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal mencari. Coba lagi.</div>`;
+                    `<div style="grid-column:1/-1;text-align:center;color:#ef4444;padding:30px;">❌ Gagal mencari.</div>`;
             }
         }
 
         // ============================================================
-        //  LOAD ALL HOME DATA
+        // LOAD ALL
         // ============================================================
         async function loadAll() {
-            // BANNER
             await loadSection(`${API_BASE}/banners`, 'bannerSlider', renderBanner, 20, '');
-
-            // POPULAR
             await loadSection(`${API_BASE}/series/popular`, 'popularGrid', renderCard, 10, '&take_chapter=2');
-
-            // LATEST
             await loadSection(`${API_BASE}/series/latest`, 'latestGrid', renderCard, 20, '&take_chapter=3&page=1');
-
-            // RECOMMENDATIONS
             await loadSection(`${API_BASE}/series/recommendations`, 'recommendGrid', renderCard, 10,
-            '&page=1&method=all');
-
-            // TRENDING
+                '&page=1&method=all');
             await loadSection(`${API_BASE}/series/trending`, 'trendingGrid', renderCard, 10, '&page=1');
-
-            // MOST BOOKMARKED
             await loadSection(`${API_BASE}/series/most-bookmarked`, 'bookmarkGrid', renderCard, 10, '&page=1');
-
-            // BROWSE (pagination)
             await loadBrowse(1);
         }
 
         // ============================================================
-        //  EVENT LISTENERS
+        // EVENTS
         // ============================================================
         document.getElementById('searchBtn').addEventListener('click', handleSearch);
         document.getElementById('searchInput').addEventListener('keydown', (e) => {
@@ -1087,7 +1048,7 @@
         });
 
         // ============================================================
-        //  START
+        // START
         // ============================================================
         loadAll();
     </script>
