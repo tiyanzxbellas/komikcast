@@ -550,10 +550,22 @@
             gap: 6px;
             padding: 10px 0;
         }
-        .reader-container img {
-            max-width: 100%;
-            border-radius: 4px;
+        .reader-container .page-wrapper {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
             background: #0f141e;
+            border-radius: 8px;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .reader-container .page-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         .reader-nav {
             display: flex;
@@ -586,7 +598,7 @@
         .reader-nav .chapter-info {
             color: #9aa3b8;
             font-size: 13px;
-            min-width: 120px;
+            min-width: 160px;
             text-align: center;
         }
 
@@ -626,6 +638,24 @@
             font-size: 12px;
         }
         .footer a {
+            color: #4a6cf7;
+        }
+
+        /* ===== ERROR IMAGE ===== */
+        .img-error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            color: #5a637a;
+            flex-direction: column;
+            gap: 10px;
+            background: #141a24;
+            border-radius: 8px;
+            padding: 30px;
+        }
+        .img-error i {
+            font-size: 48px;
             color: #4a6cf7;
         }
 
@@ -742,9 +772,24 @@
 
     <script>
         // ============================================================
-        // 1. KONFIGURASI API
+        // 1. KONFIGURASI API & PROXY CORS
         // ============================================================
         const API_BASE = 'https://kcastapi.bani.biz.id';
+
+        // === PROXY CORS UNTUK GAMBAR ===
+        // Menggunakan CORS proxy agar gambar dari cdn.komikcast.com bisa dimuat
+        function getProxiedImage(url) {
+            if (!url) return null;
+            // Jika sudah pakai proxy atau bukan gambar dari cdn, return asli
+            if (url.includes('corsproxy') || !url.includes('cdn.komikcast.com')) {
+                return url;
+            }
+            // Proxy gratis untuk CORS
+            return `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+        }
+
+        // Fallback image jika gagal load
+        const FALLBACK_IMAGE = 'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22%3E%3Crect fill=%22%23141a24%22 width=%22300%22 height=%22400%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2220%22 dy=%22.3em%22%3E%F0%9F%93%96%3C/text%3E%3C/svg%3E';
 
         const API = {
             banners: `${API_BASE}/banners`,
@@ -794,13 +839,11 @@
         // 4. RENDER FUNCTIONS
         // ============================================================
 
-        // 4a. Render loading
         function renderLoading(container) {
             container.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat...</div>`;
         }
 
-        // 4b. Render komik grid
-        function renderKomikGrid(container, data, limit = 0, onClick = null) {
+        function renderKomikGrid(container, data, limit = 0) {
             if (!container) return;
             if (!data || !data.data || data.data.length === 0) {
                 container.innerHTML =
@@ -813,7 +856,7 @@
             const items = limit > 0 ? data.data.slice(0, limit) : data.data;
             container.innerHTML = items.map(item => {
                 const s = item.data || {};
-                const cover = s.coverImage || '';
+                const cover = s.coverImage ? getProxiedImage(s.coverImage) : FALLBACK_IMAGE;
                 const title = s.title || 'Untitled';
                 const author = s.author || 'Unknown';
                 const format = s.format || 'komik';
@@ -825,7 +868,7 @@
                 <div class="komik-card" data-slug="${slug}">
                     <div class="thumb">
                         <img src="${cover}" alt="${title}" loading="lazy" 
-                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
+                             onerror="this.src='${FALLBACK_IMAGE}'" />
                         <span class="format-badge">${format}</span>
                         <span class="rating"><i class="fas fa-star"></i> ${rating}</span>
                     </div>
@@ -840,8 +883,7 @@
                 </div>
             `}).join('');
 
-            const cards = container.querySelectorAll('.komik-card');
-            cards.forEach(card => {
+            container.querySelectorAll('.komik-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const slug = card.dataset.slug;
                     if (slug) navigateToDetail(slug);
@@ -849,7 +891,6 @@
             });
         }
 
-        // 4c. Render banner
         function renderBanner(container, data) {
             if (!container) return;
             if (!data || !data.data || data.data.length === 0) {
@@ -862,8 +903,8 @@
             slider.className = 'banner-slider';
             slider.innerHTML = banners.map((b, i) => {
                 const s = b.data || {};
-                const cover = s.coverImage || '';
-                const bg = s.backgroundImage || '';
+                const cover = s.coverImage ? getProxiedImage(s.coverImage) : FALLBACK_IMAGE;
+                const bg = s.backgroundImage ? getProxiedImage(s.backgroundImage) : '';
                 const title = s.title || 'Untitled';
                 const author = s.author || 'Unknown';
                 const format = s.format || 'komik';
@@ -887,7 +928,7 @@
                         </button>
                     </div>
                     <div class="banner-image">
-                        <img src="${cover}" alt="${title}" loading="lazy" />
+                        <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'" />
                     </div>
                 </div>
             `}).join('');
@@ -895,7 +936,6 @@
             container.innerHTML = '';
             container.appendChild(slider);
 
-            // Dots
             const dots = document.createElement('div');
             dots.className = 'banner-dots';
             dots.innerHTML = banners.map((_, i) =>
@@ -903,7 +943,6 @@
             ).join('');
             container.appendChild(dots);
 
-            // Slider logic
             let current = 0;
             const total = banners.length;
             const slides = slider.querySelectorAll('.banner-slide');
@@ -936,7 +975,6 @@
             });
         }
 
-        // 4d. Render genre chips
         function renderGenres(container, data, onChipClick) {
             if (!container) return;
             if (!data || !data.data) return;
@@ -955,7 +993,6 @@
         // 5. PAGE RENDERERS
         // ============================================================
 
-        // 5a. Home
         async function renderHome() {
             const app = document.getElementById('app');
             app.innerHTML = `
@@ -975,7 +1012,6 @@
                 <div class="komik-grid" id="trendingGrid"></div>
             `;
 
-            // Loading states
             ['popularGrid', 'latestGrid', 'recommendGrid', 'trendingGrid'].forEach(id => {
                 renderLoading(document.getElementById(id));
             });
@@ -999,7 +1035,6 @@
             renderKomikGrid(document.getElementById('recommendGrid'), recommend, 8);
             renderKomikGrid(document.getElementById('trendingGrid'), trending, 8);
 
-            // View All buttons
             document.querySelectorAll('.view-all').forEach(el => {
                 el.addEventListener('click', () => {
                     const page = el.dataset.page;
@@ -1007,11 +1042,9 @@
                 });
             });
 
-            // Nav active
             setActiveNav('home');
         }
 
-        // 5b. Popular / Latest / Manga / Manhwa
         async function renderListPage(type, title, icon, apiUrl, limit = 20) {
             const app = document.getElementById('app');
             app.innerHTML = `
@@ -1030,7 +1063,6 @@
             setActiveNav(type);
         }
 
-        // 5c. Detail Komik
         async function renderDetail(slug) {
             const app = document.getElementById('app');
             app.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat detail...</div>`;
@@ -1048,7 +1080,7 @@
             }
 
             const s = data.data;
-            const cover = s.coverImage || '';
+            const cover = s.coverImage ? getProxiedImage(s.coverImage) : FALLBACK_IMAGE;
             const title = s.title || 'Untitled';
             const author = s.author || 'Unknown';
             const format = s.format || 'komik';
@@ -1065,7 +1097,7 @@
                 </div>
                 <div class="detail-container">
                     <div class="detail-cover">
-                        <img src="${cover}" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Cover%3C/text%3E%3C/svg%3E'" />
+                        <img src="${cover}" alt="${title}" onerror="this.src='${FALLBACK_IMAGE}'" />
                     </div>
                     <div class="detail-info">
                         <h1>${title}</h1>
@@ -1089,7 +1121,6 @@
 
             document.getElementById('backFromDetail').addEventListener('click', () => navigateTo('home'));
 
-            // Load chapters
             const chapterUrl = `${API_BASE}/series/${slug}/chapters`;
             const chapterData = await fetchAPI(chapterUrl, 'chapters_' + slug);
             const listContainer = document.getElementById('chapterList');
@@ -1121,7 +1152,6 @@
             currentSlug = slug;
         }
 
-        // 5d. Reader (baca chapter)
         async function renderReader(slug, chapterIndex) {
             const app = document.getElementById('app');
             app.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat chapter...</div>`;
@@ -1142,16 +1172,20 @@
             const ch = data.data;
             const images = ch.dataImages || {};
             const imageList = Object.values(images).filter(v => typeof v === 'string' && v.startsWith('http'));
-            chapterImages = imageList;
+            // Proxy semua gambar
+            chapterImages = imageList.map(url => getProxiedImage(url));
 
-            if (imageList.length === 0) {
+            if (chapterImages.length === 0) {
                 app.innerHTML =
-                    `<div style="text-align:center;padding:40px 0;color:#5a637a;">Tidak ada gambar untuk chapter ini</div>`;
+                    `<div style="text-align:center;padding:40px 0;color:#5a637a;">
+                    <i class="fas fa-image" style="font-size:40px;display:block;margin-bottom:12px;"></i>
+                    Tidak ada gambar untuk chapter ini
+                </div>`;
                 return;
             }
 
             let currentImg = 0;
-            const totalImg = imageList.length;
+            const totalImg = chapterImages.length;
             const chIdx = ch.chapterIndex || chapterIndex;
 
             function renderReaderContent() {
@@ -1161,9 +1195,9 @@
                         <span class="back-btn" id="goToDetail"><i class="fas fa-info-circle"></i> Detail</span>
                     </div>
                     <div class="reader-container">
-                        <div style="width:100%;max-width:900px;margin:0 auto;">
-                            <img src="${imageList[currentImg]}" alt="Page ${currentImg + 1}" 
-                                 style="width:100%;height:auto;" loading="lazy" />
+                        <div class="page-wrapper">
+                            <img src="${chapterImages[currentImg]}" alt="Page ${currentImg + 1}" 
+                                 loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'img-error\\'><i class=\\'fas fa-image\\'></i><span>Gagal memuat gambar ${currentImg + 1}</span></div>'" />
                         </div>
                         <div class="reader-nav">
                             <button id="prevPage" ${currentImg === 0 ? 'disabled' : ''}>
@@ -1190,7 +1224,7 @@
                 });
 
                 // Keyboard navigation
-                document.addEventListener('keydown', function handler(e) {
+                const keyHandler = (e) => {
                     if (e.key === 'ArrowLeft' && currentImg > 0) {
                         currentImg--;
                         renderReaderContent();
@@ -1198,11 +1232,9 @@
                         currentImg++;
                         renderReaderContent();
                     }
-                    // Cleanup listener to avoid duplicates
-                    document.removeEventListener('keydown', handler);
-                    // Re-bind only for the new content
-                    document.addEventListener('keydown', handler);
-                });
+                };
+                document.removeEventListener('keydown', keyHandler);
+                document.addEventListener('keydown', keyHandler);
             }
 
             renderReaderContent();
@@ -1285,7 +1317,6 @@
         // ============================================================
 
         function init() {
-            // Nav links
             document.querySelectorAll('.nav-links a').forEach(el => {
                 el.addEventListener('click', () => {
                     const page = el.dataset.page;
@@ -1293,10 +1324,8 @@
                 });
             });
 
-            // Logo
             document.getElementById('logoLink').addEventListener('click', () => navigateTo('home'));
 
-            // Search
             document.getElementById('searchBtn').addEventListener('click', () => {
                 const q = document.getElementById('searchInput').value;
                 performSearch(q);
@@ -1308,13 +1337,11 @@
                 }
             });
 
-            // Render home
             renderHome();
         }
 
         document.addEventListener('DOMContentLoaded', init);
 
-        // Expose navigation for inline onclick
         window.navigateTo = navigateTo;
         window.navigateToDetail = navigateToDetail;
         window.navigateToReader = navigateToReader;
