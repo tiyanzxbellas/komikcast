@@ -446,13 +446,6 @@
             cursor: not-allowed;
         }
 
-        .top-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
         @media (max-width: 640px) {
             .grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -484,9 +477,6 @@
             }
             .detail-info .genres {
                 justify-content: center;
-            }
-            .top-section {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
         @media (min-width: 768px) and (max-width: 1024px) {
@@ -526,27 +516,6 @@
                 </div>
             </section>
 
-            <!-- TOP SECTIONS -->
-            <div class="section-title">🏆 Top Manhwa</div>
-            <div class="grid" id="topManhwaGrid">
-                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
-            </div>
-
-            <div class="section-title">🏆 Top Manhua</div>
-            <div class="grid" id="topManhuaGrid">
-                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
-            </div>
-
-            <div class="section-title">🏆 Top Manga</div>
-            <div class="grid" id="topMangaGrid">
-                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
-            </div>
-
-            <div class="section-title">🎬 Anime Adaptations</div>
-            <div class="grid" id="animeAdaptGrid">
-                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
-            </div>
-
             <div class="section-title">🔥 Populer <span class="badge">minggu ini</span></div>
             <div class="grid" id="popularGrid">
                 <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
@@ -569,11 +538,6 @@
 
             <div class="section-title">🔖 Terbanyak di-bookmark</div>
             <div class="grid" id="bookmarkGrid">
-                <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
-            </div>
-
-            <div class="section-title">📖 Paling Banyak Dibaca</div>
-            <div class="grid" id="mostReadGrid">
                 <div class="loading" style="grid-column:1/-1;"><div class="spinner"></div><span>Memuat...</span></div>
             </div>
 
@@ -635,7 +599,11 @@
             document.getElementById('backBtn').style.display = (page === 'home') ? 'none' : 'inline-block';
 
             if (page === 'detail' && data) {
-                loadDetail(data);
+                if (typeof data === 'string') {
+                    loadDetail(data);
+                } else {
+                    loadDetail(data);
+                }
             }
             if (page === 'reader' && data) {
                 loadReader(data.slug, data.index);
@@ -856,7 +824,7 @@
         }
 
         // ============================================================
-        // LOAD CHAPTERS
+        // LOAD CHAPTERS - FIXED
         // ============================================================
         async function loadChapters(slug, page = 1) {
             const chapterList = document.getElementById('chapterList');
@@ -865,8 +833,13 @@
             chapterList.innerHTML = `<div class="loading"><div class="spinner"></div><span>Memuat chapter...</span></div>`;
 
             try {
+                // PERBAIKAN: Gunakan parameter yang benar untuk mengambil chapters
                 const url = `${API_BASE}/series/${slug}/chapters?take=20&page=${page}`;
+                console.log('Fetching chapters from:', url);
+                
                 const json = await fetchJSON(url);
+                console.log('Chapters response:', json);
+                
                 const chapters = json.data || [];
                 const total = json.metadata?.total || chapters.length;
 
@@ -880,9 +853,12 @@
                 currentChapters = chapters;
 
                 chapterList.innerHTML = chapters.map((ch) => {
-                    const index = ch.chapterIndex || ch.index || 0;
-                    const title = ch.data?.title || `Chapter ${index}`;
-                    const date = ch.createdAt ? new Date(ch.createdAt).toLocaleDateString('id-ID') : '';
+                    // Coba berbagai kemungkinan struktur data chapter
+                    const index = ch.chapterIndex || ch.index || ch.data?.chapterIndex || 0;
+                    const title = ch.data?.title || ch.title || `Chapter ${index}`;
+                    const date = ch.createdAt || ch.data?.createdAt ? 
+                        new Date(ch.createdAt || ch.data?.createdAt).toLocaleDateString('id-ID') : '';
+                    
                     return `
                         <div class="chapter-item" onclick="navigateTo('reader', {slug:'${slug}', index:${index}})">
                             <span class="ch-title">${title}</span>
@@ -906,13 +882,20 @@
 
             } catch (err) {
                 console.error('Error loading chapters:', err);
-                chapterList.innerHTML =
-                    `<div style="padding:20px;text-align:center;color:#ef4444;">❌ Gagal memuat chapter.</div>`;
+                chapterList.innerHTML = `
+                    <div style="padding:20px;text-align:center;color:#ef4444;background:#141a22;border-radius:16px;border:1px solid #1e2630;">
+                        <div style="font-size:48px;margin-bottom:16px;">❌</div>
+                        <p>Gagal memuat chapter.</p>
+                        <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">${err.message}</p>
+                        <p style="font-size:12px;color:#4a5568;margin-top:4px;">Pastikan slug komik benar: ${slug}</p>
+                    </div>
+                `;
+                chapterPagination.innerHTML = '';
             }
         }
 
         // ============================================================
-        // LOAD READER
+        // LOAD READER - FIXED
         // ============================================================
         async function loadReader(slug, index) {
             currentSlug = slug;
@@ -927,13 +910,18 @@
 
             try {
                 const url = `${API_BASE}/series/${slug}/chapters/${index}`;
+                console.log('Fetching chapter from:', url);
+                
                 const json = await fetchJSON(url);
+                console.log('Chapter response:', json);
+                
                 const chapter = json.data;
 
                 if (!chapter) throw new Error('Chapter not found');
 
                 let imageUrls = [];
 
+                // Coba berbagai kemungkinan struktur data gambar
                 if (chapter.data?.images && Array.isArray(chapter.data.images)) {
                     imageUrls = chapter.data.images.filter(url => url && url.trim() !== '');
                 }
@@ -950,6 +938,10 @@
                     imageUrls = Object.values(chapter.data.dataImages).filter(url => url && url.trim() !== '');
                 }
 
+                if (!imageUrls.length && chapter.pages && Array.isArray(chapter.pages)) {
+                    imageUrls = chapter.pages.filter(url => url && url.trim() !== '');
+                }
+
                 console.log('Image URLs found:', imageUrls.length);
 
                 if (!imageUrls.length) {
@@ -963,23 +955,26 @@
                     return;
                 }
 
-                const chIdx = currentChapters.findIndex(c => (c.chapterIndex || c.index) === index);
+                // Cari posisi chapter di daftar
+                const chIdx = currentChapters.findIndex(c => {
+                    const chIndex = c.chapterIndex || c.index || c.data?.chapterIndex || 0;
+                    return chIndex === index;
+                });
                 const totalCh = currentChapters.length;
 
                 document.getElementById('prevChapterBtn').disabled = (chIdx <= 0);
                 document.getElementById('nextChapterBtn').disabled = (chIdx >= totalCh - 1);
 
                 if (totalCh > 0 && chIdx >= 0) {
-                    const prevIdx = chIdx > 0 ? (currentChapters[chIdx - 1].chapterIndex || currentChapters[chIdx - 1]
-                        .index) : null;
-                    const nextIdx = chIdx < totalCh - 1 ? (currentChapters[chIdx + 1].chapterIndex || currentChapters[
-                        chIdx + 1].index) : null;
+                    const prevIdx = chIdx > 0 ? (currentChapters[chIdx - 1].chapterIndex || currentChapters[chIdx - 1].index || 0) : null;
+                    const nextIdx = chIdx < totalCh - 1 ? (currentChapters[chIdx + 1].chapterIndex || currentChapters[chIdx + 1].index || 0) : null;
                     navInfo.textContent =
                         `${chIdx+1} / ${totalCh} ${prevIdx !== null ? '• ⬅ Ch'+prevIdx : ''} ${nextIdx !== null ? '• ➡ Ch'+nextIdx : ''}`;
                 } else {
                     navInfo.textContent = `Chapter ${index}`;
                 }
 
+                // Render gambar
                 content.innerHTML = imageUrls.map((url, i) =>
                     `<img src="${url}" alt="Page ${i+1}" loading="lazy" onerror="this.style.display='none'" />`
                 ).join('');
@@ -991,6 +986,7 @@
                         <div style="font-size:48px;margin-bottom:16px;">❌</div>
                         <p>Gagal memuat chapter.</p>
                         <p style="font-size:13px;color:#6b7a8d;margin-top:8px;">${err.message}</p>
+                        <p style="font-size:12px;color:#4a5568;margin-top:4px;">HTTP 404 - Chapter tidak ditemukan</p>
                     </div>
                 `;
             }
@@ -1000,20 +996,26 @@
         // READER NAVIGATION
         // ============================================================
         function prevChapter() {
-            const chIdx = currentChapters.findIndex(c => (c.chapterIndex || c.index) === currentChapterIndex);
+            const chIdx = currentChapters.findIndex(c => {
+                const chIndex = c.chapterIndex || c.index || c.data?.chapterIndex || 0;
+                return chIndex === currentChapterIndex;
+            });
             if (chIdx > 0) {
                 const prev = currentChapters[chIdx - 1];
-                const idx = prev.chapterIndex || prev.index;
+                const idx = prev.chapterIndex || prev.index || prev.data?.chapterIndex || 0;
                 currentChapterIndex = idx;
                 loadReader(currentSlug, idx);
             }
         }
 
         function nextChapter() {
-            const chIdx = currentChapters.findIndex(c => (c.chapterIndex || c.index) === currentChapterIndex);
+            const chIdx = currentChapters.findIndex(c => {
+                const chIndex = c.chapterIndex || c.index || c.data?.chapterIndex || 0;
+                return chIndex === currentChapterIndex;
+            });
             if (chIdx < currentChapters.length - 1) {
                 const next = currentChapters[chIdx + 1];
-                const idx = next.chapterIndex || next.index;
+                const idx = next.chapterIndex || next.index || next.data?.chapterIndex || 0;
                 currentChapterIndex = idx;
                 loadReader(currentSlug, idx);
             }
@@ -1065,11 +1067,6 @@
                 '&page=1&method=all');
             await loadSection(`${API_BASE}/series/trending`, 'trendingGrid', renderCard, 10, '&page=1');
             await loadSection(`${API_BASE}/series/most-bookmarked`, 'bookmarkGrid', renderCard, 10, '&page=1');
-            await loadSection(`${API_BASE}/series/most-read`, 'mostReadGrid', renderCard, 10, '&page=1');
-            await loadSection(`${API_BASE}/series/top/manhwa`, 'topManhwaGrid', renderCard, 10, '&page=1');
-            await loadSection(`${API_BASE}/series/top/manhua`, 'topManhuaGrid', renderCard, 10, '&page=1');
-            await loadSection(`${API_BASE}/series/top/manga`, 'topMangaGrid', renderCard, 10, '&page=1');
-            await loadSection(`${API_BASE}/series/top/anime-adaptations`, 'animeAdaptGrid', renderCard, 10, '&page=1');
             await loadBrowse(1);
         }
 
