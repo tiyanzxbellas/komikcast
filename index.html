@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>KomikCast - Baca Komik Online</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         /* ===== RESET & BASE ===== */
@@ -15,32 +13,29 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: #0b0e14;
             color: #e8edf5;
             line-height: 1.6;
             min-height: 100vh;
         }
-
         a {
             text-decoration: none;
             color: inherit;
+            cursor: pointer;
         }
-
         img {
             max-width: 100%;
             display: block;
         }
-
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* ===== SCROLLBAR ===== */
+        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -53,370 +48,361 @@
             background: #4a6cf7;
             border-radius: 10px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #5f7cf8;
-        }
 
-        /* ===== HEADER / NAVBAR ===== */
+        /* ===== NAVBAR ===== */
         .navbar {
-            background: rgba(11, 14, 20, 0.92);
+            background: rgba(11, 14, 20, 0.95);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 14px 0;
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 100;
         }
-
         .navbar .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
-
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: 900;
-            font-size: 24px;
-            letter-spacing: -0.5px;
+            font-size: 22px;
             color: #fff;
         }
-
         .logo i {
             color: #4a6cf7;
-            font-size: 28px;
+            font-size: 26px;
         }
-
         .logo span {
             background: linear-gradient(135deg, #4a6cf7, #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
         }
-
         .nav-links a {
-            padding: 8px 16px;
-            border-radius: 10px;
+            padding: 6px 14px;
+            border-radius: 8px;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 13px;
             color: #9aa3b8;
-            transition: all 0.25s ease;
+            transition: all 0.25s;
         }
-
         .nav-links a:hover,
         .nav-links a.active {
             background: rgba(74, 108, 247, 0.15);
             color: #fff;
         }
-
         .nav-links a.active {
             color: #4a6cf7;
         }
-
         .search-box {
             display: flex;
             align-items: center;
             background: #1a1f2a;
-            border-radius: 12px;
-            padding: 4px 8px 4px 16px;
+            border-radius: 10px;
+            padding: 2px 6px 2px 14px;
             border: 1px solid transparent;
             transition: border 0.3s;
-            min-width: 200px;
+            min-width: 180px;
         }
-
         .search-box:focus-within {
             border-color: #4a6cf7;
-            background: #1e2330;
         }
-
         .search-box input {
             background: transparent;
             border: none;
             outline: none;
             color: #fff;
-            padding: 10px 6px;
-            font-size: 14px;
+            padding: 8px 4px;
+            font-size: 13px;
             width: 100%;
             font-family: 'Inter', sans-serif;
         }
-
         .search-box input::placeholder {
             color: #5a637a;
         }
-
         .search-box button {
             background: none;
             border: none;
             color: #5a637a;
             cursor: pointer;
-            padding: 8px 10px;
-            font-size: 16px;
+            padding: 6px 8px;
+            font-size: 14px;
             transition: color 0.3s;
         }
-
         .search-box button:hover {
             color: #4a6cf7;
         }
 
+        /* ===== PAGE CONTAINER ===== */
+        #app {
+            min-height: 70vh;
+            padding: 20px 0 40px;
+        }
+
         /* ===== HERO BANNER ===== */
         .hero-banner {
-            margin: 28px 0 36px;
-            border-radius: 20px;
+            margin-bottom: 30px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
             background: #141a24;
-            min-height: 340px;
+            min-height: 280px;
         }
-
         .banner-slider {
             display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         .banner-slide {
             min-width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 0;
-            padding: 30px 40px;
-            min-height: 340px;
+            padding: 28px 36px;
+            min-height: 280px;
             align-items: center;
             background-size: cover;
             background-position: center;
             position: relative;
         }
-
         .banner-slide::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg, rgba(11, 14, 20, 0.85) 40%, rgba(11, 14, 20, 0.2) 100%);
+            background: linear-gradient(90deg, rgba(11, 14, 20, 0.88) 45%, rgba(11, 14, 20, 0.15) 100%);
             z-index: 0;
         }
-
         .banner-slide>* {
             position: relative;
             z-index: 1;
         }
-
         .banner-info {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
-
         .banner-info .badge {
             display: inline-block;
-            background: rgba(74, 108, 247, 0.25);
+            background: rgba(74, 108, 247, 0.2);
             color: #4a6cf7;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 3px 12px;
+            border-radius: 16px;
+            font-size: 11px;
             font-weight: 600;
-            letter-spacing: 0.3px;
             text-transform: uppercase;
             width: fit-content;
         }
-
         .banner-info h2 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 800;
             line-height: 1.2;
         }
-
         .banner-info .meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px 20px;
-            font-size: 14px;
+            gap: 10px 18px;
+            font-size: 13px;
             color: #9aa3b8;
         }
-
         .banner-info .meta i {
-            margin-right: 6px;
+            margin-right: 5px;
             color: #4a6cf7;
         }
-
         .banner-info p {
             color: #b0baca;
-            font-size: 14px;
-            max-width: 480px;
+            font-size: 13px;
+            max-width: 460px;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
         .banner-info .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             background: #4a6cf7;
             color: #fff;
-            padding: 10px 28px;
-            border-radius: 12px;
+            padding: 8px 24px;
+            border-radius: 10px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             border: none;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
             width: fit-content;
-            margin-top: 4px;
+            margin-top: 2px;
         }
-
         .banner-info .btn:hover {
             background: #5f7cf8;
             transform: translateY(-2px);
         }
-
         .banner-image {
             display: flex;
             justify-content: flex-end;
             align-items: center;
         }
-
         .banner-image img {
-            max-height: 260px;
+            max-height: 220px;
             width: auto;
-            border-radius: 14px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
             object-fit: cover;
         }
-
         .banner-dots {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 6px;
+            padding: 10px 0 4px;
         }
-
         .banner-dots span {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: #2a3040;
             cursor: pointer;
             transition: all 0.3s;
         }
-
         .banner-dots span.active {
             background: #4a6cf7;
-            width: 28px;
-            border-radius: 6px;
+            width: 24px;
+            border-radius: 4px;
         }
 
-        /* ===== SECTION TITLE ===== */
+        /* ===== GENRE CHIPS ===== */
+        .genre-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 6px 0 18px;
+        }
+        .genre-chips .chip {
+            background: #141a24;
+            padding: 5px 16px;
+            border-radius: 18px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #b0baca;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.25s;
+            cursor: pointer;
+        }
+        .genre-chips .chip:hover {
+            background: #1a1f2a;
+            border-color: #4a6cf7;
+            color: #fff;
+        }
+
+        /* ===== SECTION ===== */
         .section-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 40px 0 20px;
+            margin: 32px 0 16px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
-
         .section-header h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
         .section-header h2 i {
             color: #4a6cf7;
         }
-
         .section-header .view-all {
-            font-size: 13px;
+            font-size: 12px;
             color: #4a6cf7;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 6px;
-            transition: gap 0.3s;
             cursor: pointer;
+            transition: gap 0.3s;
         }
-
         .section-header .view-all:hover {
             gap: 12px;
         }
-
-        /* ===== GRID KOMIK ===== */
-        .komik-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 20px;
+        .section-header .back-btn {
+            font-size: 13px;
+            color: #9aa3b8;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .section-header .back-btn:hover {
+            color: #fff;
+        }
+        .section-header .back-btn i {
+            margin-right: 6px;
         }
 
+        /* ===== KOMIK GRID ===== */
+        .komik-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 18px;
+        }
         .komik-card {
             background: #141a24;
-            border-radius: 14px;
+            border-radius: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
-
         .komik-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
             border-color: rgba(74, 108, 247, 0.2);
         }
-
         .komik-card .thumb {
             position: relative;
             aspect-ratio: 2/3;
             overflow: hidden;
             background: #0f141e;
         }
-
         .komik-card .thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
         }
-
         .komik-card:hover .thumb img {
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
-
         .komik-card .thumb .format-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 8px;
+            left: 8px;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-size: 10px;
+            padding: 2px 10px;
+            border-radius: 5px;
+            font-size: 9px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
             color: #9aa3b8;
         }
-
         .komik-card .thumb .rating {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            bottom: 8px;
+            right: 8px;
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(4px);
-            padding: 3px 10px;
-            border-radius: 6px;
+            padding: 2px 10px;
+            border-radius: 5px;
             font-size: 12px;
             font-weight: 600;
             color: #fbbf24;
@@ -424,81 +410,184 @@
             align-items: center;
             gap: 4px;
         }
-
         .komik-card .thumb .rating i {
-            font-size: 11px;
+            font-size: 10px;
         }
-
         .komik-card .info {
-            padding: 12px 14px 16px;
+            padding: 10px 12px 14px;
         }
-
         .komik-card .info h3 {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             line-height: 1.3;
         }
-
         .komik-card .info .author {
-            font-size: 12px;
+            font-size: 11px;
             color: #7a839a;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
         .komik-card .info .chapters {
-            font-size: 12px;
+            font-size: 11px;
             color: #4a6cf7;
             font-weight: 500;
         }
-
         .komik-card .info .genres {
             display: flex;
             flex-wrap: wrap;
-            gap: 4px;
-            margin-top: 6px;
+            gap: 3px;
+            margin-top: 5px;
         }
-
         .komik-card .info .genres span {
-            font-size: 9px;
+            font-size: 8px;
             background: #1a1f2a;
             padding: 2px 10px;
-            border-radius: 12px;
+            border-radius: 10px;
             color: #9aa3b8;
             text-transform: lowercase;
         }
 
-        /* ===== GENRE CHIPS ===== */
-        .genre-chips {
+        /* ===== DETAIL KOMIK ===== */
+        .detail-container {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 30px;
+            padding: 10px 0;
+        }
+        .detail-cover img {
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            width: 100%;
+        }
+        .detail-info h1 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .detail-info .subtitle {
+            color: #7a839a;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .detail-info .detail-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin: 10px 0 6px;
-        }
-
-        .genre-chips .chip {
-            background: #141a24;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
+            gap: 16px 28px;
+            font-size: 14px;
             color: #b0baca;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            transition: all 0.25s;
-            cursor: pointer;
+            margin-bottom: 14px;
+        }
+        .detail-info .detail-meta i {
+            color: #4a6cf7;
+            width: 18px;
+        }
+        .detail-info .detail-synopsis {
+            color: #b0baca;
+            font-size: 14px;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-bottom: 16px;
+        }
+        .detail-info .detail-genres {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .detail-info .detail-genres span {
+            background: #141a24;
+            padding: 4px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            color: #b0baca;
         }
 
-        .genre-chips .chip:hover {
+        /* ===== CHAPTER LIST ===== */
+        .chapter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+        .chapter-list .chapter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: #141a24;
+            border-radius: 8px;
+            transition: background 0.2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .chapter-list .chapter-item:hover {
             background: #1a1f2a;
+            border-color: rgba(74, 108, 247, 0.15);
+        }
+        .chapter-list .chapter-item .ch-number {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .chapter-list .chapter-item .ch-date {
+            font-size: 12px;
+            color: #5a637a;
+        }
+
+        /* ===== READER ===== */
+        .reader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 0;
+        }
+        .reader-container img {
+            max-width: 100%;
+            border-radius: 4px;
+            background: #0f141e;
+        }
+        .reader-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 16px 0 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .reader-nav button {
+            background: #1a1f2a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e8edf5;
+            padding: 8px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.25s;
+            font-family: 'Inter', sans-serif;
+        }
+        .reader-nav button:hover:not(:disabled) {
+            background: #4a6cf7;
             border-color: #4a6cf7;
-            color: #fff;
+        }
+        .reader-nav button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .reader-nav .chapter-info {
+            color: #9aa3b8;
+            font-size: 13px;
+            min-width: 120px;
+            text-align: center;
         }
 
         /* ===== LOADING ===== */
@@ -506,34 +595,36 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 60px 0;
+            padding: 50px 0;
             color: #5a637a;
             font-size: 14px;
             gap: 12px;
         }
-
         .loading i {
-            font-size: 28px;
+            font-size: 26px;
             color: #4a6cf7;
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            margin-top: 60px;
-            padding: 30px 0;
-            text-align: center;
-            color: #5a637a;
-            font-size: 13px;
+        /* ===== HIDDEN ===== */
+        .hidden {
+            display: none !important;
         }
 
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+            padding: 24px 0;
+            text-align: center;
+            color: #5a637a;
+            font-size: 12px;
+        }
         .footer a {
             color: #4a6cf7;
         }
@@ -542,11 +633,10 @@
         @media (max-width: 992px) {
             .banner-slide {
                 grid-template-columns: 1fr;
-                padding: 30px 24px;
+                padding: 24px 20px;
                 text-align: center;
-                min-height: 300px;
+                min-height: 240px;
             }
-
             .banner-info p {
                 max-width: 100%;
             }
@@ -557,15 +647,21 @@
                 display: none;
             }
             .banner-info h2 {
-                font-size: 22px;
+                font-size: 20px;
+            }
+            .detail-container {
+                grid-template-columns: 1fr;
+            }
+            .detail-cover {
+                max-width: 200px;
+                margin: 0 auto;
             }
         }
-
         @media (max-width: 768px) {
             .navbar .container {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 8px;
+                gap: 6px;
             }
             .nav-links {
                 justify-content: center;
@@ -575,35 +671,37 @@
                 width: 100%;
             }
             .komik-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 14px;
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 12px;
             }
             .banner-slide {
-                padding: 20px 16px;
-                min-height: 240px;
+                padding: 16px;
+                min-height: 200px;
             }
             .banner-info h2 {
-                font-size: 18px;
+                font-size: 17px;
             }
             .banner-info .meta {
-                font-size: 12px;
-                gap: 6px 12px;
+                font-size: 11px;
+                gap: 4px 10px;
             }
         }
-
         @media (max-width: 480px) {
             .komik-grid {
-                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
                 gap: 10px;
             }
             .komik-card .info {
-                padding: 8px 10px 12px;
+                padding: 6px 8px 10px;
             }
             .komik-card .info h3 {
-                font-size: 12px;
+                font-size: 11px;
             }
             .section-header h2 {
-                font-size: 18px;
+                font-size: 16px;
+            }
+            .detail-info h1 {
+                font-size: 20px;
             }
         }
     </style>
@@ -613,80 +711,32 @@
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar">
         <div class="container">
-            <a href="#" class="logo">
+            <a class="logo" id="logoLink">
                 <i class="fas fa-book-open"></i>
                 <span>KomikCast</span>
             </a>
-            <div class="nav-links">
-                <a href="#" class="active">Beranda</a>
-                <a href="#popular">Populer</a>
-                <a href="#latest">Terbaru</a>
-                <a href="#top-manga">Manga</a>
-                <a href="#top-manhwa">Manhwa</a>
+            <div class="nav-links" id="navLinks">
+                <a class="active" data-page="home">Beranda</a>
+                <a data-page="popular">Populer</a>
+                <a data-page="latest">Terbaru</a>
+                <a data-page="manga">Manga</a>
+                <a data-page="manhwa">Manhwa</a>
             </div>
-            <div class="search-box" id="searchBox">
+            <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Cari komik..." />
                 <button id="searchBtn"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </nav>
 
-    <main class="container">
-
-        <!-- ===== HERO BANNER ===== -->
-        <section class="hero-banner" id="heroBanner">
-            <div class="banner-slider" id="bannerSlider">
-                <!-- akan diisi JS -->
-            </div>
-            <div class="banner-dots" id="bannerDots"></div>
-        </section>
-
-        <!-- ===== GENRE CHIPS ===== -->
-        <div class="genre-chips" id="genreChips"></div>
-
-        <!-- ===== SECTION: POPULER ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-fire"></i> Populer</h2>
-            <span class="view-all" id="viewPopular">Lihat semua <i class="fas fa-arrow-right"></i></span>
-        </div>
-        <div class="komik-grid" id="popularGrid"></div>
-
-        <!-- ===== SECTION: TERBARU ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-clock"></i> Terbaru</h2>
-            <span class="view-all" id="viewLatest">Lihat semua <i class="fas fa-arrow-right"></i></span>
-        </div>
-        <div class="komik-grid" id="latestGrid"></div>
-
-        <!-- ===== SECTION: TOP MANGA ===== -->
-        <div class="section-header" id="top-manga">
-            <h2><i class="fas fa-book"></i> Top Manga</h2>
-        </div>
-        <div class="komik-grid" id="topMangaGrid"></div>
-
-        <!-- ===== SECTION: TOP MANHWA ===== -->
-        <div class="section-header" id="top-manhwa">
-            <h2><i class="fas fa-pen-fancy"></i> Top Manhwa</h2>
-        </div>
-        <div class="komik-grid" id="topManhwaGrid"></div>
-
-        <!-- ===== SECTION: REKOMENDASI ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-star"></i> Rekomendasi</h2>
-        </div>
-        <div class="komik-grid" id="recommendGrid"></div>
-
-        <!-- ===== SECTION: TRENDING ===== -->
-        <div class="section-header">
-            <h2><i class="fas fa-chart-line"></i> Trending</h2>
-        </div>
-        <div class="komik-grid" id="trendingGrid"></div>
-
+    <!-- ===== MAIN APP ===== -->
+    <main class="container" id="app">
+        <!-- Konten akan di-render oleh JS -->
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>© 2026 <a href="#">KomikCast</a> — Data dari API KomikCast &bull; Dibuat dengan <i class="fas fa-heart" style="color:#4a6cf7;"></i></p>
+            <p>© 2026 <a href="#">KomikCast</a> — Data dari API KomikCast</p>
         </div>
     </footer>
 
@@ -696,23 +746,31 @@
         // ============================================================
         const API_BASE = 'https://kcastapi.bani.biz.id';
 
-        const ENDPOINTS = {
+        const API = {
             banners: `${API_BASE}/banners`,
             genres: `${API_BASE}/genres`,
-            popular: `${API_BASE}/series/popular?take=10&take_chapter=2`,
-            latest: `${API_BASE}/series/latest?take=12&take_chapter=3&page=1`,
-            topManga: `${API_BASE}/series/top/manga?take=8&page=1`,
-            topManhwa: `${API_BASE}/series/top/manhwa?take=8&page=1`,
-            recommendations: `${API_BASE}/series/recommendations?take=8&page=1&method=all`,
-            trending: `${API_BASE}/series/trending?take=8&page=1`,
+            popular: `${API_BASE}/series/popular?take=12&take_chapter=2`,
+            latest: `${API_BASE}/series/latest?take=16&take_chapter=3&page=1`,
+            topManga: `${API_BASE}/series/top/manga?take=10&page=1`,
+            topManhwa: `${API_BASE}/series/top/manhwa?take=10&page=1`,
+            recommendations: `${API_BASE}/series/recommendations?take=10&page=1&method=all`,
+            trending: `${API_BASE}/series/trending?take=10&page=1`,
             search: `${API_BASE}/series/search?take=12&page=1&take_chapter=2`,
         };
 
         // ============================================================
-        // 2. FUNGSI FETCH DENGAN CACHE & ERROR HANDLING
+        // 2. STATE & CACHE
         // ============================================================
         const cache = new Map();
+        let currentPage = 'home';
+        let currentSlug = null;
+        let currentChapterIndex = null;
+        let chapterImages = [];
+        let allChapters = [];
 
+        // ============================================================
+        // 3. FETCH HELPER
+        // ============================================================
         async function fetchAPI(url, cacheKey) {
             if (cacheKey && cache.has(cacheKey)) {
                 return cache.get(cacheKey);
@@ -733,21 +791,75 @@
         }
 
         // ============================================================
-        // 3. RENDER BANNER
+        // 4. RENDER FUNCTIONS
         // ============================================================
-        async function renderBanners() {
-            const data = await fetchAPI(ENDPOINTS.banners, 'banners');
-            const slider = document.getElementById('bannerSlider');
-            const dots = document.getElementById('bannerDots');
 
+        // 4a. Render loading
+        function renderLoading(container) {
+            container.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat...</div>`;
+        }
+
+        // 4b. Render komik grid
+        function renderKomikGrid(container, data, limit = 0, onClick = null) {
+            if (!container) return;
             if (!data || !data.data || data.data.length === 0) {
-                slider.innerHTML = `<div class="banner-slide" style="justify-content:center;text-align:center;color:#5a637a;">
-                    <p><i class="fas fa-image" style="font-size:40px;display:block;margin-bottom:12px;"></i> Tidak ada banner</p>
+                container.innerHTML =
+                    `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#5a637a;">
+                    <i class="fas fa-inbox" style="font-size:30px;display:block;margin-bottom:10px;"></i>
+                    Tidak ada komik
                 </div>`;
                 return;
             }
+            const items = limit > 0 ? data.data.slice(0, limit) : data.data;
+            container.innerHTML = items.map(item => {
+                const s = item.data || {};
+                const cover = s.coverImage || '';
+                const title = s.title || 'Untitled';
+                const author = s.author || 'Unknown';
+                const format = s.format || 'komik';
+                const rating = s.rating || 0;
+                const totalCh = s.totalChapters || '?';
+                const genres = s.genres || [];
+                const slug = s.slug || '';
+                return `
+                <div class="komik-card" data-slug="${slug}">
+                    <div class="thumb">
+                        <img src="${cover}" alt="${title}" loading="lazy" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
+                        <span class="format-badge">${format}</span>
+                        <span class="rating"><i class="fas fa-star"></i> ${rating}</span>
+                    </div>
+                    <div class="info">
+                        <h3>${title}</h3>
+                        <div class="author">${author}</div>
+                        <div class="chapters"><i class="fas fa-book-open"></i> ${totalCh} ch</div>
+                        <div class="genres">
+                            ${genres.slice(0, 3).map(g => `<span>${g.data?.name || g.name || ''}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
 
+            const cards = container.querySelectorAll('.komik-card');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const slug = card.dataset.slug;
+                    if (slug) navigateToDetail(slug);
+                });
+            });
+        }
+
+        // 4c. Render banner
+        function renderBanner(container, data) {
+            if (!container) return;
+            if (!data || !data.data || data.data.length === 0) {
+                container.innerHTML =
+                    `<div style="padding:30px;text-align:center;color:#5a637a;">Tidak ada banner</div>`;
+                return;
+            }
             const banners = data.data;
+            const slider = document.createElement('div');
+            slider.className = 'banner-slider';
             slider.innerHTML = banners.map((b, i) => {
                 const s = b.data || {};
                 const cover = s.coverImage || '';
@@ -758,7 +870,7 @@
                 const rating = s.rating || 0;
                 const synopsis = s.synopsis || '';
                 const slug = s.slug || '';
-
+                const totalCh = s.totalChapters || '?';
                 return `
                 <div class="banner-slide" style="background-image: url('${bg}');">
                     <div class="banner-info">
@@ -767,12 +879,12 @@
                         <div class="meta">
                             <span><i class="fas fa-user"></i> ${author}</span>
                             <span><i class="fas fa-star" style="color:#fbbf24;"></i> ${rating}/10</span>
-                            <span><i class="fas fa-bookmark"></i> ${s.totalChapters || 0} chapter</span>
+                            <span><i class="fas fa-bookmark"></i> ${totalCh} chapter</span>
                         </div>
-                        <p>${synopsis.slice(0, 150)}${synopsis.length > 150 ? '...' : ''}</p>
-                        <a href="#" class="btn" data-slug="${slug}">
+                        <p>${synopsis.slice(0, 140)}${synopsis.length > 140 ? '...' : ''}</p>
+                        <button class="btn" data-slug="${slug}">
                             <i class="fas fa-eye"></i> Baca Sekarang
-                        </a>
+                        </button>
                     </div>
                     <div class="banner-image">
                         <img src="${cover}" alt="${title}" loading="lazy" />
@@ -780,10 +892,16 @@
                 </div>
             `}).join('');
 
+            container.innerHTML = '';
+            container.appendChild(slider);
+
             // Dots
+            const dots = document.createElement('div');
+            dots.className = 'banner-dots';
             dots.innerHTML = banners.map((_, i) =>
                 `<span class="${i === 0 ? 'active' : ''}" data-index="${i}"></span>`
             ).join('');
+            container.appendChild(dots);
 
             // Slider logic
             let current = 0;
@@ -801,162 +919,384 @@
             dots.addEventListener('click', (e) => {
                 const dot = e.target.closest('span');
                 if (!dot) return;
-                const idx = parseInt(dot.dataset.index);
-                goTo(idx);
+                goTo(parseInt(dot.dataset.index));
             });
 
-            // Auto slide
-            let interval = setInterval(() => goTo(current + 1), 6000);
+            let interval = setInterval(() => goTo(current + 1), 5000);
             slider.addEventListener('mouseenter', () => clearInterval(interval));
             slider.addEventListener('mouseleave', () => {
-                interval = setInterval(() => goTo(current + 1), 6000);
+                interval = setInterval(() => goTo(current + 1), 5000);
             });
 
-            // Click banner button
-            document.querySelectorAll('.banner-info .btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
+            container.querySelectorAll('.banner-info .btn').forEach(btn => {
+                btn.addEventListener('click', () => {
                     const slug = btn.dataset.slug;
-                    if (slug) alert(`🔗 Navigasi ke: /series/${slug}`);
+                    if (slug) navigateToDetail(slug);
+                });
+            });
+        }
+
+        // 4d. Render genre chips
+        function renderGenres(container, data, onChipClick) {
+            if (!container) return;
+            if (!data || !data.data) return;
+            const genres = data.data.slice(0, 24);
+            container.innerHTML = genres.map(g =>
+                `<span class="chip" data-id="${g.id}">${g.data?.name || g.name || 'Unknown'}</span>`
+            ).join('');
+            container.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    if (onChipClick) onChipClick(chip.textContent);
                 });
             });
         }
 
         // ============================================================
-        // 4. RENDER GENRE CHIPS
+        // 5. PAGE RENDERERS
         // ============================================================
-        async function renderGenres() {
-            const data = await fetchAPI(ENDPOINTS.genres, 'genres');
-            const container = document.getElementById('genreChips');
-            if (!data || !data.data) return;
 
-            const genres = data.data.slice(0, 20);
-            container.innerHTML = genres.map(g =>
-                `<span class="chip" data-id="${g.id}">${g.data?.name || g.name || 'Unknown'}</span>`
-            ).join('');
+        // 5a. Home
+        async function renderHome() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="hero-banner" id="heroBanner"></div>
+                <div class="genre-chips" id="genreChips"></div>
+                <div class="section-header"><h2><i class="fas fa-fire"></i> Populer</h2>
+                    <span class="view-all" data-page="popular">Lihat semua <i class="fas fa-arrow-right"></i></span>
+                </div>
+                <div class="komik-grid" id="popularGrid"></div>
+                <div class="section-header"><h2><i class="fas fa-clock"></i> Terbaru</h2>
+                    <span class="view-all" data-page="latest">Lihat semua <i class="fas fa-arrow-right"></i></span>
+                </div>
+                <div class="komik-grid" id="latestGrid"></div>
+                <div class="section-header"><h2><i class="fas fa-star"></i> Rekomendasi</h2></div>
+                <div class="komik-grid" id="recommendGrid"></div>
+                <div class="section-header"><h2><i class="fas fa-chart-line"></i> Trending</h2></div>
+                <div class="komik-grid" id="trendingGrid"></div>
+            `;
 
-            container.addEventListener('click', (e) => {
-                const chip = e.target.closest('.chip');
-                if (chip) {
-                    const name = chip.textContent;
-                    document.getElementById('searchInput').value = name;
-                    performSearch(name);
-                }
+            // Loading states
+            ['popularGrid', 'latestGrid', 'recommendGrid', 'trendingGrid'].forEach(id => {
+                renderLoading(document.getElementById(id));
             });
+
+            const [banners, genres, popular, latest, recommend, trending] = await Promise.all([
+                fetchAPI(API.banners, 'banners'),
+                fetchAPI(API.genres, 'genres'),
+                fetchAPI(API.popular, 'popular'),
+                fetchAPI(API.latest, 'latest'),
+                fetchAPI(API.recommendations, 'recommend'),
+                fetchAPI(API.trending, 'trending'),
+            ]);
+
+            renderBanner(document.getElementById('heroBanner'), banners);
+            renderGenres(document.getElementById('genreChips'), genres, (query) => {
+                document.getElementById('searchInput').value = query;
+                performSearch(query);
+            });
+            renderKomikGrid(document.getElementById('popularGrid'), popular, 8);
+            renderKomikGrid(document.getElementById('latestGrid'), latest, 10);
+            renderKomikGrid(document.getElementById('recommendGrid'), recommend, 8);
+            renderKomikGrid(document.getElementById('trendingGrid'), trending, 8);
+
+            // View All buttons
+            document.querySelectorAll('.view-all').forEach(el => {
+                el.addEventListener('click', () => {
+                    const page = el.dataset.page;
+                    if (page) navigateTo(page);
+                });
+            });
+
+            // Nav active
+            setActiveNav('home');
         }
 
-        // ============================================================
-        // 5. RENDER KOMIK GRID
-        // ============================================================
-        function renderKomikGrid(containerId, data, limit = 10) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
+        // 5b. Popular / Latest / Manga / Manhwa
+        async function renderListPage(type, title, icon, apiUrl, limit = 20) {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="section-header">
+                    <h2><i class="${icon}"></i> ${title}</h2>
+                    <span class="back-btn" id="backHome"><i class="fas fa-arrow-left"></i> Kembali</span>
+                </div>
+                <div class="komik-grid" id="listGrid"></div>
+            `;
 
-            if (!data || !data.data || data.data.length === 0) {
-                container.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;padding:40px 0;color:#5a637a;">
-                    <i class="fas fa-inbox" style="font-size:32px;display:block;margin-bottom:12px;"></i>
-                    Tidak ada komik
+            renderLoading(document.getElementById('listGrid'));
+            const data = await fetchAPI(apiUrl, type);
+            renderKomikGrid(document.getElementById('listGrid'), data, limit);
+
+            document.getElementById('backHome').addEventListener('click', () => navigateTo('home'));
+            setActiveNav(type);
+        }
+
+        // 5c. Detail Komik
+        async function renderDetail(slug) {
+            const app = document.getElementById('app');
+            app.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat detail...</div>`;
+
+            const url = `${API_BASE}/series/${slug}`;
+            const data = await fetchAPI(url, 'detail_' + slug);
+            if (!data || !data.data) {
+                app.innerHTML =
+                    `<div style="text-align:center;padding:60px 0;color:#5a637a;">
+                    <i class="fas fa-exclamation-circle" style="font-size:40px;display:block;margin-bottom:12px;"></i>
+                    Komik tidak ditemukan
+                    <br><br><button onclick="navigateTo('home')" style="background:#4a6cf7;color:#fff;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;">Kembali</button>
                 </div>`;
                 return;
             }
 
-            const items = data.data.slice(0, limit);
-            container.innerHTML = items.map(item => {
-                const s = item.data || {};
-                const cover = s.coverImage || '';
-                const title = s.title || 'Untitled';
-                const author = s.author || 'Unknown';
-                const format = s.format || 'komik';
-                const rating = s.rating || 0;
-                const totalCh = s.totalChapters || '?';
-                const genres = s.genres || [];
-                const slug = s.slug || '';
+            const s = data.data;
+            const cover = s.coverImage || '';
+            const title = s.title || 'Untitled';
+            const author = s.author || 'Unknown';
+            const format = s.format || 'komik';
+            const rating = s.rating || 0;
+            const status = s.status || 'ongoing';
+            const totalCh = s.totalChapters || '?';
+            const synopsis = s.synopsis || 'Tidak ada sinopsis';
+            const genres = s.genres || [];
 
-                return `
-                <div class="komik-card" data-slug="${slug}">
-                    <div class="thumb">
-                        <img src="${cover}" alt="${title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Image%3C/text%3E%3C/svg%3E'" />
-                        <span class="format-badge">${format}</span>
-                        <span class="rating"><i class="fas fa-star"></i> ${rating}</span>
+            app.innerHTML = `
+                <div class="section-header">
+                    <span class="back-btn" id="backFromDetail"><i class="fas fa-arrow-left"></i> Kembali</span>
+                    <span></span>
+                </div>
+                <div class="detail-container">
+                    <div class="detail-cover">
+                        <img src="${cover}" alt="${title}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22300%22%3E%3Crect fill=%22%23141a24%22 width=%22200%22 height=%22300%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%235a637a%22 font-family=%22sans-serif%22 font-size=%2216%22 dy=%22.3em%22%3ENo Cover%3C/text%3E%3C/svg%3E'" />
                     </div>
-                    <div class="info">
-                        <h3>${title}</h3>
-                        <div class="author">${author}</div>
-                        <div class="chapters"><i class="fas fa-book-open"></i> ${totalCh} ch</div>
-                        <div class="genres">
-                            ${genres.slice(0, 3).map(g => `<span>${g.data?.name || g.name || ''}</span>`).join('')}
+                    <div class="detail-info">
+                        <h1>${title}</h1>
+                        <div class="subtitle">${format.toUpperCase()} • ${status}</div>
+                        <div class="detail-meta">
+                            <span><i class="fas fa-user"></i> ${author}</span>
+                            <span><i class="fas fa-star" style="color:#fbbf24;"></i> ${rating}/10</span>
+                            <span><i class="fas fa-bookmark"></i> ${totalCh} chapter</span>
+                        </div>
+                        <div class="detail-genres">
+                            ${genres.map(g => `<span>${g.data?.name || g.name || ''}</span>`).join('')}
+                        </div>
+                        <div class="detail-synopsis">${synopsis}</div>
+                        <h3 style="margin-top:12px;font-size:16px;"><i class="fas fa-list"></i> Daftar Chapter</h3>
+                        <div class="chapter-list" id="chapterList">
+                            <div class="loading"><i class="fas fa-spinner"></i> Memuat chapter...</div>
                         </div>
                     </div>
                 </div>
+            `;
+
+            document.getElementById('backFromDetail').addEventListener('click', () => navigateTo('home'));
+
+            // Load chapters
+            const chapterUrl = `${API_BASE}/series/${slug}/chapters`;
+            const chapterData = await fetchAPI(chapterUrl, 'chapters_' + slug);
+            const listContainer = document.getElementById('chapterList');
+
+            if (!chapterData || !chapterData.data || chapterData.data.length === 0) {
+                listContainer.innerHTML = `<p style="color:#5a637a;padding:10px 0;">Belum ada chapter</p>`;
+                return;
+            }
+
+            allChapters = chapterData.data;
+            listContainer.innerHTML = allChapters.map((ch, idx) => {
+                const chIdx = ch.chapterIndex || idx + 1;
+                const date = ch.createdAt ? new Date(ch.createdAt).toLocaleDateString('id-ID') : '';
+                return `
+                <div class="chapter-item" data-index="${idx}">
+                    <span class="ch-number">Chapter ${chIdx}</span>
+                    <span class="ch-date">${date}</span>
+                </div>
             `}).join('');
 
-            // Click handler
-            container.querySelectorAll('.komik-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const slug = card.dataset.slug;
-                    if (slug) alert(`🔗 Navigasi ke: /series/${slug}`);
+            listContainer.querySelectorAll('.chapter-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = parseInt(el.dataset.index);
+                    navigateToReader(slug, idx);
                 });
             });
+
+            setActiveNav(null);
+            currentSlug = slug;
+        }
+
+        // 5d. Reader (baca chapter)
+        async function renderReader(slug, chapterIndex) {
+            const app = document.getElementById('app');
+            app.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat chapter...</div>`;
+
+            const url = `${API_BASE}/series/${slug}/chapters/${chapterIndex}`;
+            const data = await fetchAPI(url, 'reader_' + slug + '_' + chapterIndex);
+
+            if (!data || !data.data) {
+                app.innerHTML =
+                    `<div style="text-align:center;padding:60px 0;color:#5a637a;">
+                    <i class="fas fa-exclamation-circle" style="font-size:40px;display:block;margin-bottom:12px;"></i>
+                    Chapter tidak ditemukan
+                    <br><br><button onclick="navigateToDetail('${slug}')" style="background:#4a6cf7;color:#fff;border:none;padding:10px 28px;border-radius:8px;cursor:pointer;">Kembali ke Detail</button>
+                </div>`;
+                return;
+            }
+
+            const ch = data.data;
+            const images = ch.dataImages || {};
+            const imageList = Object.values(images).filter(v => typeof v === 'string' && v.startsWith('http'));
+            chapterImages = imageList;
+
+            if (imageList.length === 0) {
+                app.innerHTML =
+                    `<div style="text-align:center;padding:40px 0;color:#5a637a;">Tidak ada gambar untuk chapter ini</div>`;
+                return;
+            }
+
+            let currentImg = 0;
+            const totalImg = imageList.length;
+            const chIdx = ch.chapterIndex || chapterIndex;
+
+            function renderReaderContent() {
+                app.innerHTML = `
+                    <div class="section-header">
+                        <span class="back-btn" id="backFromReader"><i class="fas fa-arrow-left"></i> Kembali</span>
+                        <span class="back-btn" id="goToDetail"><i class="fas fa-info-circle"></i> Detail</span>
+                    </div>
+                    <div class="reader-container">
+                        <div style="width:100%;max-width:900px;margin:0 auto;">
+                            <img src="${imageList[currentImg]}" alt="Page ${currentImg + 1}" 
+                                 style="width:100%;height:auto;" loading="lazy" />
+                        </div>
+                        <div class="reader-nav">
+                            <button id="prevPage" ${currentImg === 0 ? 'disabled' : ''}>
+                                <i class="fas fa-chevron-left"></i> Sebelumnya
+                            </button>
+                            <span class="chapter-info">Chapter ${chIdx} • Halaman ${currentImg + 1} / ${totalImg}</span>
+                            <button id="nextPage" ${currentImg === totalImg - 1 ? 'disabled' : ''}>
+                                Selanjutnya <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('backFromReader').addEventListener('click', () => navigateTo('home'));
+                document.getElementById('goToDetail').addEventListener('click', () => navigateToDetail(slug));
+
+                document.getElementById('prevPage').addEventListener('click', () => {
+                    if (currentImg > 0) { currentImg--;
+                        renderReaderContent(); }
+                });
+                document.getElementById('nextPage').addEventListener('click', () => {
+                    if (currentImg < totalImg - 1) { currentImg++;
+                        renderReaderContent(); }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', function handler(e) {
+                    if (e.key === 'ArrowLeft' && currentImg > 0) {
+                        currentImg--;
+                        renderReaderContent();
+                    } else if (e.key === 'ArrowRight' && currentImg < totalImg - 1) {
+                        currentImg++;
+                        renderReaderContent();
+                    }
+                    // Cleanup listener to avoid duplicates
+                    document.removeEventListener('keydown', handler);
+                    // Re-bind only for the new content
+                    document.addEventListener('keydown', handler);
+                });
+            }
+
+            renderReaderContent();
+            setActiveNav(null);
+            currentSlug = slug;
+            currentChapterIndex = chapterIndex;
         }
 
         // ============================================================
-        // 6. SEARCH
+        // 6. NAVIGATION
         // ============================================================
+
+        function navigateTo(page) {
+            currentPage = page;
+            switch (page) {
+                case 'home':
+                    renderHome();
+                    break;
+                case 'popular':
+                    renderListPage('popular', 'Populer', 'fas fa-fire', API.popular);
+                    break;
+                case 'latest':
+                    renderListPage('latest', 'Terbaru', 'fas fa-clock', API.latest);
+                    break;
+                case 'manga':
+                    renderListPage('manga', 'Top Manga', 'fas fa-book', API.topManga);
+                    break;
+                case 'manhwa':
+                    renderListPage('manhwa', 'Top Manhwa', 'fas fa-pen-fancy', API.topManhwa);
+                    break;
+                default:
+                    renderHome();
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToDetail(slug) {
+            currentPage = 'detail';
+            renderDetail(slug);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function navigateToReader(slug, chapterIndex) {
+            currentPage = 'reader';
+            renderReader(slug, chapterIndex);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function setActiveNav(page) {
+            document.querySelectorAll('.nav-links a').forEach(el => {
+                el.classList.toggle('active', el.dataset.page === page);
+            });
+        }
+
+        // ============================================================
+        // 7. SEARCH
+        // ============================================================
+
         async function performSearch(query) {
             if (!query.trim()) return;
-            const url = `${ENDPOINTS.search}&q=${encodeURIComponent(query.trim())}`;
+            const url = `${API.search}&q=${encodeURIComponent(query.trim())}`;
             const data = await fetchAPI(url, 'search_' + query.trim());
-            if (data && data.data) {
-                renderKomikGrid('popularGrid', data, 10);
-                // ganti judul section
-                const header = document.querySelector('.section-header h2');
-                if (header) header.innerHTML = `<i class="fas fa-search"></i> Hasil: "${query}"`;
-            }
+
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <div class="section-header">
+                    <h2><i class="fas fa-search"></i> Hasil pencarian: "${query}"</h2>
+                    <span class="back-btn" id="backFromSearch"><i class="fas fa-arrow-left"></i> Kembali</span>
+                </div>
+                <div class="komik-grid" id="searchGrid"></div>
+            `;
+
+            renderKomikGrid(document.getElementById('searchGrid'), data, 0);
+            document.getElementById('backFromSearch').addEventListener('click', () => navigateTo('home'));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // ============================================================
-        // 7. INIT
+        // 8. INIT
         // ============================================================
-        async function init() {
-            // Tampilkan loading
-            document.querySelectorAll('.komik-grid').forEach(el => {
-                el.innerHTML = `<div class="loading"><i class="fas fa-spinner"></i> Memuat...</div>`;
+
+        function init() {
+            // Nav links
+            document.querySelectorAll('.nav-links a').forEach(el => {
+                el.addEventListener('click', () => {
+                    const page = el.dataset.page;
+                    if (page) navigateTo(page);
+                });
             });
 
-            // Jalankan semua fetch paralel
-            const [
-                bannersData,
-                genresData,
-                popularData,
-                latestData,
-                topMangaData,
-                topManhwaData,
-                recommendData,
-                trendingData
-            ] = await Promise.all([
-                fetchAPI(ENDPOINTS.banners, 'banners'),
-                fetchAPI(ENDPOINTS.genres, 'genres'),
-                fetchAPI(ENDPOINTS.popular, 'popular'),
-                fetchAPI(ENDPOINTS.latest, 'latest'),
-                fetchAPI(ENDPOINTS.topManga, 'topManga'),
-                fetchAPI(ENDPOINTS.topManhwa, 'topManhwa'),
-                fetchAPI(ENDPOINTS.recommendations, 'recommend'),
-                fetchAPI(ENDPOINTS.trending, 'trending'),
-            ]);
+            // Logo
+            document.getElementById('logoLink').addEventListener('click', () => navigateTo('home'));
 
-            // Render
-            await renderBanners();
-            await renderGenres();
-
-            renderKomikGrid('popularGrid', popularData, 10);
-            renderKomikGrid('latestGrid', latestData, 12);
-            renderKomikGrid('topMangaGrid', topMangaData, 8);
-            renderKomikGrid('topManhwaGrid', topManhwaData, 8);
-            renderKomikGrid('recommendGrid', recommendData, 8);
-            renderKomikGrid('trendingGrid', trendingData, 8);
-
-            // Event Search
+            // Search
             document.getElementById('searchBtn').addEventListener('click', () => {
                 const q = document.getElementById('searchInput').value;
                 performSearch(q);
@@ -968,20 +1308,17 @@
                 }
             });
 
-            // View All buttons
-            document.getElementById('viewPopular').addEventListener('click', () => {
-                alert('📚 Menampilkan semua komik populer...');
-            });
-            document.getElementById('viewLatest').addEventListener('click', () => {
-                alert('📚 Menampilkan semua komik terbaru...');
-            });
-
-            console.log('✅ KomikCast siap!');
+            // Render home
+            renderHome();
         }
 
-        // Jalankan
         document.addEventListener('DOMContentLoaded', init);
-    </script>
 
+        // Expose navigation for inline onclick
+        window.navigateTo = navigateTo;
+        window.navigateToDetail = navigateToDetail;
+        window.navigateToReader = navigateToReader;
+        window.performSearch = performSearch;
+    </script>
 </body>
 </html>
